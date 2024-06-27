@@ -8,7 +8,7 @@
 
         <head>
             <meta charset="UTF-8"> <!-- Character encoding declaration -->
-            <title>Insert title here</title> <!-- Placeholder for the page title -->
+            <title>Route Entry</title> <!-- Placeholder for the page title -->
             <style>
                 body {
                     font-family: Arial, sans-serif;

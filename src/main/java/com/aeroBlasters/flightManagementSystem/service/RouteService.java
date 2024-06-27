@@ -17,8 +17,8 @@ public class RouteService {
 																// source
 		String destinationCode = route.getSourceAirportCode(); // Setting the original source as the return route's
 																// destination
-		return new Route(newId, sourceCode, destinationCode); // Creating and returning the new Route object
+		Double fare = route.getFare(); // Setting the fare for the return route
 
+		return new Route(newId, sourceCode, destinationCode, fare); // Creating and returning the new Route object
 	}
-
 }

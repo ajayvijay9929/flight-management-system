@@ -7,7 +7,7 @@
 
         <head>
             <meta charset="UTF-8"> <!-- Character encoding declaration -->
-            <title>Insert title here</title> <!-- Placeholder for the page title -->
+            <title>Route Reports</title> <!-- Placeholder for the page title -->
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -34,17 +34,19 @@
                 <h1>
                     <u><i>All Route</i></u> <!-- Heading with underline and italic styling -->
                 </h1>
-                <table border="1"> <!-- Table with a border -->
+                <table border="2"> <!-- Table with a border -->
                     <tr> <!-- Table row for headers -->
-                        <th>Route-id</th> <!-- Table header for route ID -->
-                        <th>Source Code</th> <!-- Table header for source airport code -->
-                        <th>Destination Code</th> <!-- Table header for destination airport code -->
+                        <th>Route Id</th> <!-- Table header for route ID -->
+                        <th>Source Airport Code</th> <!-- Table header for source airport code -->
+                        <th>Destination Airport Code</th> <!-- Table header for destination airport code -->
+                        <th>Fare</th>
                     </tr>
                     <c:forEach items="${routeList}" var="route"> <!-- Loop over each route in the routeList -->
                         <tr> <!-- Table row for each route -->
                             <td>${route.routeId}</td> <!-- Display route ID -->
                             <td>${route.sourceAirportCode}</td> <!-- Display source airport code -->
                             <td>${route.destinationAirportCode}</td> <!-- Display destination airport code -->
+                            <td>${route.fare}</td> <!-- Display fare -->
                         </tr>
                     </c:forEach>
                 </table>

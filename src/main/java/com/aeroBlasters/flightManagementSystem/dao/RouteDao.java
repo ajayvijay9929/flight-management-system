@@ -23,7 +23,7 @@ public interface RouteDao {
 
    // Method to find a route ID based on its source and destination airports
    // Note: The method returns the ID of the route, not the route object itself
-   public Long findRouteBySourceAndDestination(String source, String Destination);
+   public Long findRouteBySourceAndDestination(String source, String Destination, Double fare);
 
    // Method to generate a unique ID for a new route
    // This could be used to assign a unique identifier to a route before saving it

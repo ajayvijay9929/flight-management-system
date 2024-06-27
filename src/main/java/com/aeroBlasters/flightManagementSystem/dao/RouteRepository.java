@@ -23,8 +23,8 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 
 	// Custom query to find a route by its source and destination airport codes
 	// This method returns the route ID matching the given source and destination
-	@Query("select routeId from Route where sourceAirportCode = ?1 And destinationAirportCode= ?2")
-	public Long findRouteBySourceAndDestination(String sourceAirportCode, String destinationAirportCode);
+	@Query("select routeId from Route where sourceAirportCode = ?1 And destinationAirportCode= ?2 And fare= ?3")
+	public Long findRouteBySourceAndDestination(String sourceAirportCode, String destinationAirportCode, Double fare);
 
 }
 // Note: The use of positional parameters (?1, ?2) in custom queries could be

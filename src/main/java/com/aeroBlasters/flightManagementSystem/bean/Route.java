@@ -12,6 +12,7 @@ public class Route {
 	private Long routeId; // Unique identifier for the route
 	private String sourceAirportCode; // Airport code of the source airport
 	private String destinationAirportCode; // Airport code of the destination airport
+	private Double fare; // Fare for the route
 
 	// Default constructor
 	public Route() {
@@ -19,11 +20,12 @@ public class Route {
 	}
 
 	// Constructor with parameters to initialize route details
-	public Route(Long routeId, String sourceAirportCode, String destinationAirportCode) {
+	public Route(Long routeId, String sourceAirportCode, String destinationAirportCode, Double fare) {
 		super();
 		this.routeId = routeId;
 		this.sourceAirportCode = sourceAirportCode;
 		this.destinationAirportCode = destinationAirportCode;
+		this.fare = fare;
 	}
 
 	// Getter for routeId
@@ -54,5 +56,15 @@ public class Route {
 	// Setter for destinationAirportCode
 	public void setDestinationAirportCode(String destinationAirportCode) {
 		this.destinationAirportCode = destinationAirportCode;
+	}
+
+	// Getter for fare
+	public Double getFare() {
+		return fare;
+	}
+
+	// Setter for fare
+	public void setFare(Double fare) {
+		this.fare = fare;
 	}
 }
