@@ -52,4 +52,9 @@ public class RouteDaoImpl implements RouteDao {
 		return val;
 	}
 
+	@Override
+	public List<Long> findAllRoutesId() {
+		return repository.findAllRoutesId(); // Retrieving all route IDs from the database
+	}
+
 }

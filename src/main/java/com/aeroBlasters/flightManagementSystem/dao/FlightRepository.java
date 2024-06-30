@@ -1,20 +1,31 @@
-// Package declaration for the DAO (Data Access Object) layer
 package com.aeroBlasters.flightManagementSystem.dao;
 
-// Importing the JpaRepository interface from Spring Data JPA
-// This interface simplifies data access operations by providing CRUD (Create, Read, Update, Delete) and pagination handling
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-// Importing the Flight entity class
-// This class represents the flight data model in the application
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.stereotype.Repository;
 import com.aeroBlasters.flightManagementSystem.bean.Flight;
 
-// Declaration of the FlightRepository interface
-// This interface extends JpaRepository, linking the Flight entity with its primary key type (Long)
-// By extending JpaRepository, FlightRepository inherits methods for performing common persistence operations
+/**
+ * FlightRepository interface for accessing flight data.
+ * It extends JpaRepository to leverage Spring Data JPA's capabilities for CRUD
+ * operations and more.
+ * This interface directly connects to the Flight entity.
+ */
+@Repository // Marks the interface as a Spring Data Repository
+@EnableJpaRepositories // Enables JPA repositories. Usually placed on a configuration class, but here
+                       // for simplicity.
 public interface FlightRepository extends JpaRepository<Flight, Long> {
-    // At this point, the interface does not declare any additional methods
-    // Custom query methods can be added here as needed
+
+    /**
+     * Custom query to find flights by their route ID.
+     * Uses Spring Data JPA @Query annotation to define a JPQL (Java Persistence
+     * Query Language) query.
+     * 
+     * @param routeId The ID of the route to find flights for.
+     * @return A list of Flight entities that match the given route ID.
+     */
+    @Query("Select a from Flight a where routeId = ?1")
+    public List<Flight> findFlightsByRouteId(Long routeId);
 }
-// Note: The use of JpaRepository provides a powerful way to interact with the
-// database without writing boilerplate code.

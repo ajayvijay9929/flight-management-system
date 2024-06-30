@@ -138,7 +138,10 @@
 
             <div class="dropdown"> <!-- Dropdown for Flight, currently without dropdown content -->
                 <a href="javascript:void(0)" class="dropbtn">Flight</a>
-                <!-- Button for Flight, lacks dropdown content -->
+                <div class="dropdown-content">
+                    <a href="/flightEntryPage">Flight Addition</a>
+                    <a href="/flights">Flight Reports</a>
+                </div>
             </div>
 
             <div class="dropdown"> <!-- Direct link for Logout -->

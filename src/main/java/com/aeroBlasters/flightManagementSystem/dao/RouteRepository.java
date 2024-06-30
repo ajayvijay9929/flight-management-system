@@ -26,6 +26,8 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
 	@Query("select routeId from Route where sourceAirportCode = ?1 And destinationAirportCode= ?2 And fare= ?3")
 	public Long findRouteBySourceAndDestination(String sourceAirportCode, String destinationAirportCode, Double fare);
 
+	@Query("Select routeId from Route")
+	public List<Long> findAllRoutesId();
 }
 // Note: The use of positional parameters (?1, ?2) in custom queries could be
 // replaced with named parameters for better readability.

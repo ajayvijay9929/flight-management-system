@@ -29,6 +29,8 @@ public interface RouteDao {
    // This could be used to assign a unique identifier to a route before saving it
    // to the database
    public Long generateRouteId();
+
+   public List<Long> findAllRoutesId();
 }
 // Note: The interface assumes the existence of an underlying mechanism to
 // persist and retrieve Route objects, such as a database.

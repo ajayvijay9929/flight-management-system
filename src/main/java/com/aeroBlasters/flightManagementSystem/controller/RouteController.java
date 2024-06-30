@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aeroBlasters.flightManagementSystem.bean.Flight;
 // Importing project-specific classes for Route and DAOs
 import com.aeroBlasters.flightManagementSystem.bean.Route;
 import com.aeroBlasters.flightManagementSystem.dao.AirportDao;
+import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
+import com.aeroBlasters.flightManagementSystem.service.FlightService;
 import com.aeroBlasters.flightManagementSystem.service.RouteService;
 
 // Annotation to declare this class as a REST controller
@@ -28,6 +32,10 @@ public class RouteController {
 	private RouteService routeService;
 	@Autowired
 	private AirportDao airportDao;
+	@Autowired
+	private FlightService service;
+	@Autowired
+	private FlightDao flightDao;
 
 	// Handler method for GET request to display the route entry page
 	@GetMapping("/routeEntryPage")
@@ -72,6 +80,34 @@ public class RouteController {
 		// Preparing the ModelAndView with the view name and the list of routes
 		ModelAndView mv = new ModelAndView("routeReportPage");
 		mv.addObject("routeList", routeList);
+		return mv;
+	}
+
+	@GetMapping("/flightEntryPage")
+	public ModelAndView showFlightEntryPage() {
+		List<Long> routeList = routeDao.findAllRoutesId();
+		Flight flight = new Flight();
+		ModelAndView mv = new ModelAndView("flightEntryPage");
+		mv.addObject("flightRecord", flight);
+		mv.addObject("routeList", routeList);
+		return mv;
+	}
+
+	@PostMapping("/flight")
+	public ModelAndView saveFlights(@ModelAttribute("flightRecord") Flight flight1, @RequestParam("dtime") String dtime,
+			@RequestParam("atime") String atime) {
+		Flight flight2 = service.createReturnFlight(flight1, dtime, atime);
+		flightDao.save(flight1);
+		flightDao.save(flight2);
+		return new ModelAndView("index_2");
+
+	}
+
+	@GetMapping("/flights")
+	public ModelAndView showFlightReportPage() {
+		List<Flight> flightList = flightDao.findAllFlights();
+		ModelAndView mv = new ModelAndView("flightReportPage");
+		mv.addObject("flightList", flightList);
 		return mv;
 	}
 
