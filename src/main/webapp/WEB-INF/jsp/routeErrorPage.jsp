@@ -8,17 +8,12 @@
     </head>
 
     <body>
-
         <div align="center">
-            <h2 style="color:red">
-
-                Wrong credentials...
-
-            </h2>
+            <h1 style="color:red">
+                ${errorMessage}
+            </h1>
+            <h3><a href="/flight-search">Click here to Re-enter</a></h3>
         </div>
-        <jsp:include page="loginPage.jsp"></jsp:include>
-
-
     </body>
 
     </html>

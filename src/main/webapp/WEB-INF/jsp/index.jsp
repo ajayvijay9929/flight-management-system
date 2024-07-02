@@ -1,55 +1,122 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <!-- JSP directive specifying page language, content type, and encoding -->
-    <!DOCTYPE html> <!-- Declares the document type and version of HTML -->
+    <!DOCTYPE html>
     <html>
 
     <head>
-        <meta charset="UTF-8"> <!-- Specifies the character encoding for the HTML document -->
-        <title>Welcome to Flight Management System</title> <!-- Sets the title of the web page -->
+        <meta charset="UTF-8">
+
+        <title>Flight Management System</title>
         <style>
             body {
-                background-color: #f8f9fa;
-                /* Sets the background color of the page */
-                background-image: url('https://i.pinimg.com/736x/fb/42/47/fb4247224e40018d710e59f4c130672b.jpg');
-                /* Sets the background image from a URL */
+                font-family: Arial, sans-serif;
+                background-image: url('/images/flights.jpg');
+                /* Path to your background image */
                 background-size: cover;
-                /* Ensures the background image covers the entire page */
+                /* Cover the entire page */
                 background-position: center;
-                /* Centers the background image */
+                /* Center the image */
                 background-repeat: no-repeat;
-                /* Prevents the background image from repeating */
+                /* Do not repeat the image */
+                height: 100vh;
+                /* Ensure body takes full height */
                 margin: 0;
-                /* Removes the default margin */
-                padding: 0;
-                /* Removes the default padding */
-                height: 50vh;
-                /* Sets the height of the body to 50% of the viewport height */
-                display: flex;
-                /* Enables flexbox layout for its children */
-                justify-content: center;
-                /* Centers its children horizontally */
-                align-items: center;
-                /* Centers its children vertically */
+                /* Remove default margin */
             }
 
-            h1 {
-                font-style: italic;
-                /* Makes the text italic */
-                font-weight: bold;
-                /* Makes the text bold */
-                color: #800000;
-                /* Sets the text color */
-                margin-bottom: 200px;
-                /* Adds a bottom margin to push content below */
+            .navbar {
+                display: flex;
+                background-color: #4602FB;
+                padding: 20px;
+            }
+
+            .navbar a {
+                color: white;
+                padding: 20px 30px;
+                text-decoration: none;
                 text-align: center;
-                /* Centers the text horizontally */
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 220px;
+                box-shadow: 0px 8px 16px 0px rgb(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+
+            .dropdown:hover .dropbtn {
+                background-color: red;
+            }
+
+            .title {
+                text-align: center;
+                margin: 20px;
+                font-size: 24px;
+                font-weight: italic;
             }
         </style>
     </head>
 
     <body>
-        <div>
-            <h1>Welcome to Flight Management System</h1> <!-- Displays the welcome message in a styled h1 tag -->
+
+        <div class="title">
+            <u>
+                WELCOME TO FLIGHT MANAGEMENT SYSTEM</u>
+        </div>
+
+        <div class="navbar">
+            <div class="dropdown">
+
+                <a href="javascript:void(0)" class="dropbtn">Airport</a>
+                <div class="dropdown-content">
+                    <a href="/airport">Airport Addition</a>
+                    <!--  <a href="/airport-select">Single Airport Information</a>-->
+                    <a href="/airports">Airport Reports</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Route</a>
+                <div class="dropdown-content">
+                    <a href="/routeEntryPage">Route Addition</a>
+                    <a href="/routes">Routes Report</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Flight</a>
+                <div class="dropdown-content">
+                    <a href="/flight">Flight Addition</a>
+                    <a href="/flights">All Flights</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="/loginpage">Logout</a>
+            </div>
+
         </div>
     </body>
 

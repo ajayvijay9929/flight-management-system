@@ -9,16 +9,6 @@
 
     <body>
 
-        <div align="center">
-            <h2 style="color:red">
-
-                Wrong credentials...
-
-            </h2>
-        </div>
-        <jsp:include page="loginPage.jsp"></jsp:include>
-
-
     </body>
 
     </html>
