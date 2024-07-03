@@ -95,7 +95,7 @@ public class RouteFlightController {
         return mv;
     }
 
-    @GetMapping("/flight-search")
+    @GetMapping("/searchflight")
     public ModelAndView showRouteSelectPage() {
         List<String> airportList = airportDao.findAllAirportLocations();
         ModelAndView mv = new ModelAndView("routeSelectPage");
@@ -103,7 +103,7 @@ public class RouteFlightController {
         return mv;
     }
 
-    @PostMapping("/flight-search")
+    @PostMapping("/searchflight")
     public ModelAndView showRouteFlightsPage(@RequestParam("from_city") String fromCity,
             @RequestParam("to_city") String toCity) {
         String fromAirport = airportDao.findAirportCodeByLocation(fromCity);
