@@ -58,16 +58,17 @@
                                 <div class="form-group">
                                     <label for="routeId">Select Route ID:</label>
                                     <form:input list="routes" path="routeId" class="form-control" id="routeId" />
+                                    <datalist id="routes">
+                                        <c:forEach items="${routeList}" var="route">
+                                            <option value="${route}"></option>
+                                        </c:forEach>
+                                    </datalist>
                                 </div>
-                                <datalist id="routes">
-                                    <c:forEach items="${routeList}" var="route">
-                                        <option value="${route}"></option>
-                                    </c:forEach>
-                                </datalist>
                                 <div class="form-group">
                                     <label for="seatCapacity">Enter Seat Capacity:</label>
                                     <form:input path="seatCapacity" class="form-control" id="seatCapacity" />
                                 </div>
+                                <!-- The departure and arrival fields map to the Flight object and are handled by @ModelAttribute -->
                                 <div class="form-group">
                                     <label for="departure">Enter Departure Time:</label>
                                     <form:input path="departure" class="form-control" id="departure" />
@@ -76,6 +77,7 @@
                                     <label for="arrival">Enter Arrival Time:</label>
                                     <form:input path="arrival" class="form-control" id="arrival" />
                                 </div>
+                                <!-- dtime and atime are not part of the Flight object and are handled separately by @RequestParam -->
                                 <div class="form-group">
                                     <label for="dtime">Enter Return Flight Departure Time:</label>
                                     <input type="text" name="dtime" class="form-control" id="dtime" />

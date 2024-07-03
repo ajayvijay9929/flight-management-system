@@ -2,11 +2,13 @@ package com.aeroBlasters.flightManagementSystem.controller;
 
 import java.util.List;
 
+// Remove the unused import statement
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,13 +31,15 @@ public class AirportController {
 	public ModelAndView showAirportEntryPage() {
 		Airport airport = new Airport();
 		ModelAndView mv = new ModelAndView("airportEntryPage");
-		mv.addObject("airportRecord", airport);
+		mv.addObject("airport_data", airport);
 		return mv;
 	}
 
 	@PostMapping("/airport")
-	public ModelAndView saveAirport(@ModelAttribute("airportRecord") Airport airport) {
+	public ModelAndView saveAirport(@ModelAttribute("airport_data") Airport airport) {
+		System.out.println(airport.getAirportCode());
 		String str = airport.getAirportCode().toUpperCase();
+		System.out.println(str);
 		airport.setAirportCode(str);
 		String stg = airport.getAirportLocation().toUpperCase();
 		airport.setAirportLocation(stg);
@@ -53,7 +57,7 @@ public class AirportController {
 
 	@GetMapping("/airport/{id}")
 	public ModelAndView showSingleAirportPage(@PathVariable("id") String id) {
-		Airport airport = airportDao.findAirportById(id);
+		Airport airport = airportDao.findAirportById(id.toUpperCase());
 		ModelAndView mv = new ModelAndView("airportShowPage");
 		mv.addObject("airport", airport);
 		return mv;

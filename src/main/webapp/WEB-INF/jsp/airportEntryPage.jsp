@@ -46,22 +46,23 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6 form-container">
                             <h3 class="text-center form-title">Airport Form</h3>
-                            <form id="airportForm" action="/airport" method="post" modelAttribute="airport_data">
+                            <form:form id="airportForm" action="/airport" method="post" modelAttribute="airport_data"
+                                class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="airportLocation">Enter Airport City:</label>
-                                    <input type="text" class="form-control" id="airportLocation" path="airportLocation"
-                                        required>
+                                    <label for="airportLocation" class="control-label">Enter Airport City:</label>
+                                    <form:input type="text" class="form-control" id="airportLocation"
+                                        path="airportLocation" required="true" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="airportCode">Enter Airport Code:</label>
-                                    <input type="text" class="form-control" id="airportCode" path="airportCode"
-                                        required>
+                                    <label for="airportCode" class="control-label">Enter Airport Code:</label>
+                                    <form:input type="text" class="form-control" id="airportCode" path="airportCode"
+                                        required="true" />
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary btn-custom">Submit</button>
                                     <button type="reset" class="btn btn-secondary btn-custom">Reset</button>
                                 </div>
-                            </form>
+                            </form:form>
                             <a href="index" class="home-link">Back to Home</a>
                         </div>
                     </div>
