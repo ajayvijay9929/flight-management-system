@@ -77,6 +77,7 @@
                                     <label for="arrival">Enter Arrival Time:</label>
                                     <form:input path="arrival" class="form-control" id="arrival" />
                                 </div>
+                                <form:hidden path="seatBooked" value="0" />
                                 <!-- dtime and atime are not part of the Flight object and are handled separately by @RequestParam -->
                                 <div class="form-group">
                                     <label for="dtime">Enter Return Flight Departure Time:</label>

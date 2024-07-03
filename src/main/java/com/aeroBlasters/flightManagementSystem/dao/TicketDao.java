@@ -6,4 +6,6 @@ public interface TicketDao {
     public void save(Ticket ticket);
 
     public Long findLastTicketNumber();
+
+    public Ticket findTicketByTicketNumber(Long ticketNumber);
 }

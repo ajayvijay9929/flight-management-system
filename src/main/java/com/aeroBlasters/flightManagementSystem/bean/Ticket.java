@@ -3,14 +3,25 @@ package com.aeroBlasters.flightManagementSystem.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Ticket {
     @Id
     private Long ticketNumber;
+
+    @NotNull
     private Long routeId;
+
+    @NotNull
     private Long flightNumber;
+
+    @NotNull
+    @Size(min = 1, max = 100)
     private String carrierName;
+
+    @NotNull
     private Double totalAmount;
 
     public Ticket() {
