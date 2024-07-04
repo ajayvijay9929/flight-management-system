@@ -13,4 +13,6 @@ public interface FlightDao {
 
     public void addFlight(Flight flight);
 
+    public Flight findFlightById(Long id);
+
 }

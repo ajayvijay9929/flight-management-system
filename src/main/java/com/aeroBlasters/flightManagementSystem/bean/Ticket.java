@@ -1,10 +1,14 @@
-
 package com.aeroBlasters.flightManagementSystem.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Ticket {
@@ -20,60 +24,83 @@ public class Ticket {
     @NotNull
     @Size(min = 1, max = 100)
     private String carrierName;
+    private String fromCity;
+    private String toCity;
+    private String fare;
 
-    @NotNull
-    private Double totalAmount;
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Passenger> passengers = new ArrayList<>();
 
     public Ticket() {
         super();
     }
 
-    public Long getTicketNumber() {
-        return ticketNumber;
+    // Getters and setters for existing fields
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    public void addPassenger(Passenger passenger) {
+        passengers.add(passenger);
+        passenger.setTicket(this);
+    }
+
+    public Ticket(Long ticketNumber, Long routeId, Long flightNumber, String carrierName, String fare) {
+        this.ticketNumber = ticketNumber;
+        this.routeId = routeId;
+        this.flightNumber = flightNumber;
+        this.carrierName = carrierName;
+        this.fare = fare;
     }
 
     public void setTicketNumber(Long ticketNumber) {
         this.ticketNumber = ticketNumber;
     }
 
-    public Long getRouteId() {
-        return routeId;
+    public Long getTicketNumber() {
+        return ticketNumber;
     }
 
-    public void setRouteId(Long routeId) {
-        this.routeId = routeId;
+    public void setFromCity(String fromCity) {
+        this.fromCity = fromCity;
     }
 
-    public Long getFlightNumber() {
-        return flightNumber;
+    public void setToCity(String toCity) {
+        this.toCity = toCity;
     }
 
-    public void setFlightNumber(Long flightNumber) {
-        this.flightNumber = flightNumber;
-    }
-
-    public String getCarrierName() {
-        return carrierName;
+    public void setFare(String fare) {
+        this.fare = fare;
     }
 
     public void setCarrierName(String carrierName) {
         this.carrierName = carrierName;
     }
 
-    public Double getTotalAmount() {
-        return totalAmount;
+    // Assuming getters for the new fields are also needed
+    public String getFromCity() {
+        return fromCity;
     }
 
-    public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
+    public String getToCity() {
+        return toCity;
     }
 
-    public Ticket(Long ticketNumber, Long routeId, Long flightNumber, String carrierName, Double totalAmount) {
-        super();
-        this.ticketNumber = ticketNumber;
-        this.routeId = routeId;
+    public String getFare() {
+        return fare;
+    }
+
+    public String getCarrierName() {
+        return carrierName;
+    }
+
+    public void setFlightNumber(Long flightNumber) {
         this.flightNumber = flightNumber;
-        this.carrierName = carrierName;
-        this.totalAmount = totalAmount;
     }
+
 }

@@ -4,22 +4,23 @@ public class TicketService {
     // Existing methods remain unchanged
 
     // New method to calculate final ticket price
-    public Double calculateFinalTicketPrice(Integer birthYear, Double basePrice, Integer totalSeats, Integer bookedSeats) {
+    public Double calculateFinalTicketPrice(Integer birthYear, Double basePrice, Integer totalSeats,
+            Integer bookedSeats) {
         // Calculate age
         Integer age = ageCalculation(birthYear);
-        
+
         // Check if tickets are available
         Integer availableSeats = capacityCalculation(totalSeats, bookedSeats);
         if (availableSeats <= 0) {
             throw new IllegalStateException("No tickets available");
         }
-        
+
         // Apply discount based on age
         Double discountedPrice = discount(basePrice, age);
-        
+
         return discountedPrice;
     }
-    
+
     // discount() - No changes
     public Double discount(Double totalAmount, int age) {
         final double CHILD_DISCOUNT = 0.3; // 30% discount

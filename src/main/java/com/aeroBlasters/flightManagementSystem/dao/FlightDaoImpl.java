@@ -35,4 +35,9 @@ public class FlightDaoImpl implements FlightDao {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public Flight findFlightById(Long id) {
+        return repository.findById(id).get();
+    }
 }

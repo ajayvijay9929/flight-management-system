@@ -1,26 +1,38 @@
 package com.aeroBlasters.flightManagementSystem.bean;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import java.time.LocalDate; // Import for LocalDate
 
 @Entity
 public class Passenger {
-    @EmbeddedId
-    private TicketPassengerEmbed embeddedId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String passengerName;
     private Integer passengerAge;
     private Double fare;
+    private String dob; // Date of Birth field
+
+    @ManyToOne
+    @JoinColumn(name = "ticket_id", nullable = false)
+    private Ticket ticket;
 
     public Passenger() {
         super();
     }
 
-    public TicketPassengerEmbed getEmbeddedId() {
-        return embeddedId;
+    // Getters and setters for all fields including ticket
+    public Long getId() {
+        return id;
     }
 
-    public void setEmbeddedId(TicketPassengerEmbed embeddedId) {
-        this.embeddedId = embeddedId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getPassengerName() {
@@ -47,11 +59,23 @@ public class Passenger {
         this.fare = fare;
     }
 
-    public Passenger(TicketPassengerEmbed embeddedId, String passengerName, Integer passengerAge, Double fare) {
-        super();
-        this.embeddedId = embeddedId;
-        this.passengerName = passengerName;
-        this.passengerAge = passengerAge;
-        this.fare = fare;
+    public Ticket getTicket() {
+        return ticket;
     }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
+
+    // Removed setName method as it's redundant with setPassengerName
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    // Removed setDob(String dob) method as we now use LocalDate for dob
 }
