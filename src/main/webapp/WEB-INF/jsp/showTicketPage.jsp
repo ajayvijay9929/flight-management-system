@@ -43,6 +43,13 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                            <!-- Cancel Ticket Form -->
+                            <form:form action="/cancelTicket/${ticketRecord.ticketNumber}" method="post"
+                                modelAttribute="ticketRecord">
+                                <input type="hidden" name="ticketNumber" value="${ticketRecord.ticketNumber}" />
+                                <button type="submit" class="btn btn-danger">Cancel Ticket</button>
+                            </form:form>
                         </div>
                     </div>
                     <a href="/index" class="btn btn-primary mt-4">Back to Home</a>

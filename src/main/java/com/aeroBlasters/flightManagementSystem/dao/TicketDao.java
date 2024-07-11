@@ -8,4 +8,6 @@ public interface TicketDao {
     public Long findLastTicketNumber();
 
     public Ticket findTicketByTicketNumber(Long ticketNumber);
+
+    public void deleteTicketByTicketNumber(Long ticketNumber);
 }

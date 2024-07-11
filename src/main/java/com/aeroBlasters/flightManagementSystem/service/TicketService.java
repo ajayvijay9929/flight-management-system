@@ -1,7 +1,19 @@
 package com.aeroBlasters.flightManagementSystem.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
+import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
+
+@Service
 public class TicketService {
     // Existing methods remain unchanged
+    @Autowired
+    private PassengerDao passengerDao;
+
+    @Autowired
+    private TicketDao ticketDao;
 
     // New method to calculate final ticket price
     public Double calculateFinalTicketPrice(Integer birthYear, Double basePrice, Integer totalSeats,
@@ -47,5 +59,15 @@ public class TicketService {
     // capacityCalculation() - No changes
     public Integer capacityCalculation(Integer totalSeats, Integer bookedSeats) {
         return totalSeats - bookedSeats;
+    }
+
+    public boolean cancelTicket(Long ticketNumber) {
+        try {
+            passengerDao.deletePassengerByTicketNumber(ticketNumber);
+            ticketDao.deleteTicketByTicketNumber(ticketNumber);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

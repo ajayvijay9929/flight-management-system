@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +24,7 @@ import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
+import com.aeroBlasters.flightManagementSystem.service.TicketService;
 
 @ControllerAdvice
 @RestController
@@ -38,6 +41,9 @@ public class TicketController {
 
     @Autowired
     private PassengerDao passengerDao;
+
+    @Autowired
+    private TicketService ticketService = new TicketService();
 
     @GetMapping("/ticket/{id}")
     public ModelAndView showTicketForm(@PathVariable Long id) {
@@ -102,4 +108,21 @@ public class TicketController {
         return mv;
     }
 
+    @PostMapping("/cancelTicket/{ticketNumber}")
+    public ModelAndView cancelTicket(@PathVariable("ticketNumber") Long ticketNumber) {
+        System.out.println("Cancelling Ticket Number: " + ticketNumber);
+        boolean isCancelled = ticketService.cancelTicket(ticketNumber);
+        System.out.println("Ticket Cancelled: " + isCancelled);
+
+        ModelAndView mv = new ModelAndView("cancelTicketPage");
+        if (isCancelled) {
+            mv.setViewName("redirect:/index");
+            mv.addObject("message", "Ticket Cancelled Successfully");
+        } else {
+            mv.setViewName("errorPage");
+            mv.addObject("message", "Ticket Cancellation Failed");
+        }
+
+        return mv;
+    }
 }

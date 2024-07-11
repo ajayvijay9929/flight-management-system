@@ -12,4 +12,6 @@ public interface PassengerDao {
     public void deleteById(Long id);
 
     public void update(Passenger passenger);
+
+    public void deletePassengerByTicketNumber(Long ticketNumber);
 }

@@ -28,4 +28,9 @@ public class TicketDaoImpl implements TicketDao {
     public Ticket findTicketByTicketNumber(Long ticketNumber) {
         return repository.findById(ticketNumber).get();
     }
+
+    @Override
+    public void deleteTicketByTicketNumber(Long ticketNumber) {
+        repository.deleteTicketByTicketNumber(ticketNumber);
+    }
 }
