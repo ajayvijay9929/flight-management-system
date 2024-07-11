@@ -53,6 +53,8 @@
                                     <th>Route Id</th>
                                     <th>Departure</th>
                                     <th>Arrival</th>
+                                    <th>Fare</th>
+                                    <th>Booking</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,6 +65,14 @@
                                         <td>${flight.routeId}</td>
                                         <td>${flight.departure}</td>
                                         <td>${flight.arrival}</td>
+                                        <!-- need to fix -->
+                                        <td>5000</td>
+                                        <td><a href="/ticket/${flight.flightNumber}"
+                                                class="btn btn-danger bookTicketLink"
+                                                flightNumber="${flight.flightNumber}"
+                                                carrierName="${flight.carrierName}" data-route-id="${flight.routeId}"
+                                                data-departure="${flight.departure}"
+                                                data-arrival="${flight.arrival}">Book Ticket</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -71,6 +81,26 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Select all links with the class 'bookTicketLink'
+                    document.querySelectorAll('.bookTicketLink').forEach(function (link) {
+                        link.addEventListener('click', function (e) {
+                            e.preventDefault(); // Prevent the default link behavior
+
+                            // Extract the 'id' from the href attribute
+                            const href = this.getAttribute('href');
+                            const id = href.split('/').pop(); // Assuming the 'id' is the last part of the URL
+
+                            console.log(id); // For demonstration, shows the 'id' in the console
+
+                            // You can now use the 'id' for further processing, such as making an AJAX request
+                            // or redirecting the user to another page with this 'id' as part of the URL.
+                        });
+                    });
+                });
+            </script> -->
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

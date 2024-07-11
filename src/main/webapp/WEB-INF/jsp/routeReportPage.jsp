@@ -42,7 +42,7 @@
                                     <th>Route-id</th>
                                     <th>Source Code</th>
                                     <th>Destination Code</th>
-                                    <th>Route Fair</th>
+                                    <th>Route Fare</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,7 +51,7 @@
                                         <td>${route.routeId}</td>
                                         <td>${route.sourceAirportCode}</td>
                                         <td>${route.destinationAirportCode}</td>
-                                        <td>${route.fair}</td>
+                                        <td>${route.fare}</td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

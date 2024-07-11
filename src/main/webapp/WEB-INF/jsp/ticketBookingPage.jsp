@@ -1,150 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ticket Booking</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+        <!DOCTYPE html>
+        <html>
 
-<body>
-    <div class="container mt-5">
-        <h2 class="mb-4">Book Your Ticket</h2>
-        <form id="bookingForm" action="/ticket" method="POST">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Flight Number</label>
-                        <input type="text" class="form-control" id="flightNumber" name="flightNumberDisplay" required
-                            disabled>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Carrier Name</label>
-                        <input type="text" class="form-control" id="carrierName" name="carrierNameDisplay" required
-                            disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Total Amount</label>
-                        <input type="text" class="form-control" id="totalAmount" name="totalAmountDisplay" required
-                            disabled>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>From</label>
-                        <input type="text" class="form-control" id="fromLocation" name="fromLocationDisplay" required
-                            disabled>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>To</label>
-                        <input type="text" class="form-control" id="toLocation" name="toLocationDisplay" required
-                            disabled>
-                    </div>
-                </div>
-            </div>
-            <!-- Hidden inputs for submitting data -->
-            <input type="hidden" id="flightNumberHidden" name="flightNumber">
-            <input type="hidden" id="carrierNameHidden" name="carrierName">
-            <input type="hidden" id="totalAmountHidden" name="totalAmount">
-            <input type="hidden" id="fromLocationHidden" name="fromLocation">
-            <input type="hidden" id="toLocationHidden" name="toLocation">
-            <!-- Passenger details section -->
-            <div id="passengerDetails" class="mt-4">
-                <h4>Passenger Details</h4>
-                <!-- Placeholder for passenger fields -->
-            </div>
-            <button type="button" id="addPassenger" class="btn btn-info mt-3">Add Passenger</button>
-            <button type="submit" class="btn btn-primary mt-3">Submit</button>
-        </form>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            let passengerCount = 0;
-
-            function addPassenger() {
-                passengerCount++;
-                const passengerDiv = document.createElement('div');
-                passengerDiv.classList.add('passenger-section');
-                passengerDiv.innerHTML = `
-                    <div class="form-group">
-                        <label>Name:</label>
-                        <input type="text" name="passengerName${passengerCount}" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>DOB:</label>
-                        <input type="date" name="passengerDob${passengerCount}" class="form-control" required>
-                    </div>
-                    <button type="button" class="btn btn-danger removePassenger">Remove</button>
-                `;
-                document.getElementById('passengerDetails').appendChild(passengerDiv);
-
-                // Remove passenger event
-                passengerDiv.querySelector('.removePassenger').addEventListener('click', function () {
-                    passengerDiv.remove();
-                    passengerCount--;
-                });
-            }
-
-            document.getElementById('addPassenger').addEventListener('click', function () {
-                if (passengerCount < 6) {
-                    addPassenger();
+        <head>
+            <meta charset="UTF-8">
+            <title>Book Ticket</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-image: url('/images/flights.jpg');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    height: 100vh;
+                    margin: 0;
+                    background-color: #f8f9fa;
                 }
-            });
 
-            document.getElementById('bookingForm').addEventListener('submit', function (e) {
-                if (passengerCount === 0) {
-                    alert('Please add at least one passenger.');
-                    e.preventDefault(); // Prevent form submission
+                .details-container {
+                    margin-top: 50px;
+                    padding: 30px;
+                    background-color: rgba(255, 255, 255, 0.75);
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 }
-            });
 
-            // Initially add one passenger field
-            addPassenger();
+                .details-title {
+                    margin-bottom: 20px;
+                }
 
-            // Simulate fetching and populating flight details
-            function populateFlightDetails() {
-                // Example data, replace with actual data fetching logic
-                const flightDetails = {
-                    flightNumber: 6546,
-                    carrierName: 'Airways',
-                    totalAmount: 5000.00,
-                    fromLocation: 'City A',
-                    toLocation: 'City B'
-                };
+                .home-link {
+                    margin-top: 20px;
+                    display: block;
+                    text-align: center;
+                }
+            </style>
+        </head>
 
-                document.getElementById('flightNumber').value = flightDetails.flightNumber;
-                document.getElementById('carrierName').value = flightDetails.carrierName;
-                document.getElementById('totalAmount').value = flightDetails.totalAmount;
-                document.getElementById('fromLocation').value = flightDetails.fromLocation;
-                document.getElementById('toLocation').value = flightDetails.toLocation;
+        <body>
 
-                // Populate hidden input fields with the same values
-                document.getElementById('flightNumberHidden').value = flightDetails.flightNumber;
-                document.getElementById('carrierNameHidden').value = flightDetails.carrierName;
-                document.getElementById('totalAmountHidden').value = flightDetails.totalAmount;
-                document.getElementById('fromLocationHidden').value = flightDetails.fromLocation;
-                document.getElementById('toLocationHidden').value = flightDetails.toLocation;
-            }
+            <div align="center">
+                <form:form action="/ticket" method="post" modelAttribute="ticketRecord">
+                    <form:hidden path="ticketNumber" />
+                    <form:hidden path="flightNumber" />
+                    <form:hidden path="carrierName" />
+                    <input type="hidden" name="fromLocation" value="${route.sourceAirportCode}" />
+                    <input type="hidden" name="toLocation" value="${route.destinationAirportCode}" />
+                    <input type="hidden" name="routeId" value="${route.routeId}" />
+                    <input type="hidden" name="totalAmount" value="${route.fare}" />
+                    <h3>
+                        <table>
+                            <tr>
+                                <td><label class="required">Ticket Number : </label>
+                                    <form:input path="ticketNumber" disabled="true" />
+                                </td>
+                                <td><label class="required">Flight Number : </label>
+                                    <form:input path="flightNumber" disabled="true" />
+                                </td>
+                                <td><label class="required">Airlines Name : </label>
+                                    <form:input path="carrierName" disabled="true" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label class="required">From : </label><input type="text"
+                                        value="${route.sourceAirportCode}" disabled="true" /></td>>
+                                <td><label class="required">To : </label><input type="text"
+                                        value="${route.destinationAirportCode}" disabled="true" /></td>>
+                                <td><label class="required">Fare : </label><input type="text" value="${route.fare}"
+                                        disabled="true" /></td>>
+                            </tr>
+                        </table>
 
-            populateFlightDetails();
-        });
-    </script>
+                        <br /><br /><br /><br />
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+                        Enter Passenger Details :
+                        <table>
+                            <tr>
+                                <td>Name : <input type="text" name="name1" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob1" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024" required></td>
+                            </tr>
 
-</html>
+                            <tr>
+                                <td>Name : <input type="text" name="name2" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob2" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Name : <input type="text" name="name3" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob3" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Name : <input type="text" name="name4" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob4" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Name : <input type="text" name="name5" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob5" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024"></td>
+                            </tr>
+
+                            <tr>
+                                <td>Name : <input type="text" name="name6" value="--"></td>
+                                <td>Date Of Birth : <input type="date" name="dob6" pattern="\d{1,2}-\d{1,2}-\d{4}"
+                                        placeholder="25-10-2024"></td>
+                            </tr>
+
+                        </table>
+                    </h3>
+
+                    <button type="submit">Submit</button>
+
+                </form:form>
+            </div>
+        </body>
+
+        </html>

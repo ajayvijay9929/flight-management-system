@@ -116,7 +116,7 @@ public class RouteFlightController {
         mv.addObject("flightList", flightList);
         mv.addObject("fromAirport", fromCity);
         mv.addObject("toAirport", toCity);
-        mv.addObject("fair", route.getFair());
+        mv.addObject("fare", route.getFare());
         return mv;
 
     }

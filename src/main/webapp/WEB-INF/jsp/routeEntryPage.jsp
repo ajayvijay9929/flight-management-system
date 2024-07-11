@@ -58,8 +58,8 @@
                                     id="destinationAirportCode" />
                             </div>
                             <div class="form-group">
-                                <label for="fair">Enter Route Fair:</label>
-                                <form:input path="fair" class="form-control" id="fair" />
+                                <label for="fare">Enter Route Fare:</label>
+                                <form:input path="fare" class="form-control" id="fare" />
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary btn-custom">Submit</button>

@@ -10,6 +10,6 @@ public class RouteService {
 		Long newId = route.getRouteId() + 1;
 		String sourceCode = route.getDestinationAirportCode();
 		String destinationCode = route.getSourceAirportCode();
-		return new Route(newId, sourceCode, destinationCode, route.getFair());
+		return new Route(newId, sourceCode, destinationCode, route.getFare());
 	}
 }

@@ -9,14 +9,14 @@ public class Route {
 	private Long routeId;
 	private String sourceAirportCode;
 	private String destinationAirportCode;
-	private Double fair;
+	private Double fare;
 
-	public Route(Long routeId, String sourceAirportCode, String destinationAirportCode, Double fair) {
+	public Route(Long routeId, String sourceAirportCode, String destinationAirportCode, Double fare) {
 		super();
 		this.routeId = routeId;
 		this.sourceAirportCode = sourceAirportCode;
 		this.destinationAirportCode = destinationAirportCode;
-		this.fair = fair;
+		this.fare = fare;
 	}
 
 	public Route() {
@@ -47,12 +47,12 @@ public class Route {
 		this.destinationAirportCode = destinationAirportCode;
 	}
 
-	public Double getFair() {
-		return fair;
+	public Double getFare() {
+		return fare;
 	}
 
-	public void setFair(Double fair) {
-		this.fair = fair;
+	public void setFare(Double fare) {
+		this.fare = fare;
 	}
 
 }
