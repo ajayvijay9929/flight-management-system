@@ -51,7 +51,9 @@ public class RouteFlightController {
         String destination = route1.getDestinationAirportCode().toUpperCase();
         // doubt in last is there is nothing writtten after airport
         String sourceCode = airportDao.findAirportCodeByLocation(route1.getSourceAirportCode());
+        System.out.println("source code is " + sourceCode);
         String destinationCode = airportDao.findAirportCodeByLocation(route1.getDestinationAirportCode());
+        System.out.println("destination code is " + destinationCode);
         route1.setSourceAirportCode(sourceCode);
         route1.setDestinationAirportCode(destinationCode);
         Route route2 = routeService.createReturnRoute(route1);
