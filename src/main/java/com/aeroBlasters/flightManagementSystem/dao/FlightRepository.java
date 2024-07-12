@@ -12,4 +12,7 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
     @Query("SELECT a FROM Flight a WHERE routeId=?1")
     public List<Flight> findFlightsByRouteId(Long routeId);
 
+    @Query("SELECT a FROM Flight a WHERE flightNumber=?1")
+    public Flight findFlightByFlightNumber(Long flightNumber);
+
 }

@@ -59,7 +59,7 @@ public class RouteFlightController {
         Route route2 = routeService.createReturnRoute(route1);
         routeDao.save(route1);
         routeDao.save(route2);
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/index");
     }
 
     @GetMapping("/routes")
@@ -86,7 +86,7 @@ public class RouteFlightController {
         Flight flight2 = flightService.createReturnFlight(flight1, dtime, atime);
         flightDao.save(flight1);
         flightDao.save(flight2);
-        return new ModelAndView("index");
+        return new ModelAndView("redirect:/index");
     }
 
     @GetMapping("/flights")

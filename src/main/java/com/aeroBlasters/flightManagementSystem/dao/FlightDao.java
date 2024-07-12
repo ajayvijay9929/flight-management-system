@@ -15,4 +15,6 @@ public interface FlightDao {
 
     public Flight findFlightById(Long id);
 
+    public Flight findFlightByFlightNumber(Long flightNumber);
+
 }

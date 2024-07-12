@@ -3,6 +3,8 @@ package com.aeroBlasters.flightManagementSystem.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aeroBlasters.flightManagementSystem.bean.Flight;
+import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
 
@@ -15,14 +17,17 @@ public class TicketService {
     @Autowired
     private TicketDao ticketDao;
 
+    @Autowired
+    private FlightDao flightDao;
+
     // New method to calculate final ticket price
-    public Double calculateFinalTicketPrice(Integer birthYear, Double basePrice, Integer totalSeats,
-            Integer bookedSeats) {
+    public Double calculateFinalTicketPrice(Integer birthYear, Double basePrice, Long totalSeats,
+            Long bookedSeats) {
         // Calculate age
         Integer age = ageCalculation(birthYear);
 
         // Check if tickets are available
-        Integer availableSeats = capacityCalculation(totalSeats, bookedSeats);
+        Long availableSeats = capacityCalculation(totalSeats, bookedSeats);
         if (availableSeats <= 0) {
             throw new IllegalStateException("No tickets available");
         }
@@ -57,7 +62,7 @@ public class TicketService {
     }
 
     // capacityCalculation() - No changes
-    public Integer capacityCalculation(Integer totalSeats, Integer bookedSeats) {
+    public Long capacityCalculation(Long totalSeats, Long bookedSeats) {
         return totalSeats - bookedSeats;
     }
 
@@ -69,5 +74,26 @@ public class TicketService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public Long getTotalSeats(Long flightNumber) {
+        System.out.println("flight number from get toatal setas: " + flightNumber);
+        Flight flight = flightDao.findFlightByFlightNumber(flightNumber);
+        System.out.println("flight details from get toatal setas: " + flight);
+        return flight.getSeatCapacity();
+    }
+
+    public Long getBookedSeats(Long flightNumber) {
+        return flightDao.findFlightByFlightNumber(flightNumber).getSeatBooked();
+    }
+
+    public TicketService() {
+        super();
+    }
+
+    public TicketService(PassengerDao passengerDao, TicketDao ticketDao, FlightDao flightDao) {
+        this.passengerDao = passengerDao;
+        this.ticketDao = ticketDao;
+        this.flightDao = flightDao;
     }
 }

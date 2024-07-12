@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,7 +42,7 @@ public class TicketController {
     private PassengerDao passengerDao;
 
     @Autowired
-    private TicketService ticketService = new TicketService();
+    private TicketService ticketService;
 
     @GetMapping("/ticket/{id}")
     public ModelAndView showTicketForm(@PathVariable Long id) {
@@ -66,11 +65,22 @@ public class TicketController {
         Long ticketNumber = ticketDao.findLastTicketNumber() + 1;
         ticket.setTicketNumber(ticketNumber);
         System.out.println("Ticket Number: " + ticket.getTicketNumber());
+
+        // Save the ticket first
         ticketDao.save(ticket);
+
+        Double totalAmount = 0.0;
+        System.out.println("Flight Number from openshowticketpage: " + ticket.getFlightNumber());
+
+        Long totalSeats = ticketService.getTotalSeats(ticket.getFlightNumber());
+        Long bookedSeats = ticketService.getBookedSeats(ticket.getFlightNumber());
+        System.out.println("Total Seats: " + totalSeats);
+        System.out.println("Booked Seats: " + bookedSeats);
+
         ModelAndView mv = new ModelAndView("showTicketPage");
         String fromCity = request.getParameter("fromLocation");
         String toCity = request.getParameter("toLocation");
-        String totalAmount = request.getParameter("totalAmount");
+        Double basePrice = Double.parseDouble(request.getParameter("totalAmount"));
         String pname = "";
         String dob = "";
         for (int i = 1; i <= 6; i++) {
@@ -85,14 +95,16 @@ public class TicketController {
             passenger.setFare(ticket.getTotalAmount());
             passenger.setPassengerAge(LocalDate.now().getYear() - LocalDate.parse(dob).getYear());
             passengerDao.save(passenger);
+            totalAmount += ticketService.calculateFinalTicketPrice(LocalDate.parse(dob).getYear(), basePrice,
+                    totalSeats, bookedSeats);
             System.out.println("name " + pname + "dob " + pname);
         }
-
+        ticket.setTotalAmount(totalAmount);
+        ticketDao.save(ticket);
         List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
         mv.addObject("passengerList", passengerList);
         mv.addObject("ticketRecord", ticket);
         return mv;
-
     }
 
     @GetMapping("/showTicket/{ticketNumber}")

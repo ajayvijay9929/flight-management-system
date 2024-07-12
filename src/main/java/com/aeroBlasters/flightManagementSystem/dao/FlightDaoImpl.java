@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.aeroBlasters.flightManagementSystem.bean.Flight;
 
-@Repository
 @Service
+@Repository
 public class FlightDaoImpl implements FlightDao {
     @Autowired
     private FlightRepository repository;
@@ -39,5 +39,11 @@ public class FlightDaoImpl implements FlightDao {
     @Override
     public Flight findFlightById(Long id) {
         return repository.findById(id).get();
+    }
+
+    @Override
+    public Flight findFlightByFlightNumber(Long flightNumber) {
+        System.out.println("FlightDaoImpl: findFlightByFlightNumber() called");
+        return repository.findFlightByFlightNumber(flightNumber);
     }
 }

@@ -22,10 +22,10 @@ public class AirportController {
 	@Autowired
 	private AirportDao airportDao;
 
-	@GetMapping("/index")
-	public ModelAndView showIndexPage() {
-		return new ModelAndView("index");
-	}
+	// @GetMapping("/index")
+	// public ModelAndView showIndexPage() {
+	// return new ModelAndView("index");
+	// }
 
 	@GetMapping("/airport")
 	public ModelAndView showAirportEntryPage() {
@@ -44,7 +44,8 @@ public class AirportController {
 		String stg = airport.getAirportLocation().toUpperCase();
 		airport.setAirportLocation(stg);
 		airportDao.addAirport(airport);
-		return new ModelAndView("index");
+		return new ModelAndView("redirect:/index");
+		// return new ModelAndView("index");
 	}
 	// @PostMapping("/airport-select")
 	// public ModelAndView showSingleAirportPage(@RequestParam("airport-code")

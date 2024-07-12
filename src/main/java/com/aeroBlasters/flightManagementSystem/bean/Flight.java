@@ -10,7 +10,7 @@ public class Flight {
 	private Long flightNumber;
 	private String carrierName;
 	private Long routeId;
-	private Integer seatCapacity;
+	private Long seatCapacity;
 	private String departure;
 	private String arrival;
 	private Long seatBooked;
@@ -43,11 +43,11 @@ public class Flight {
 		this.routeId = routeId;
 	}
 
-	public Integer getSeatCapacity() {
+	public Long getSeatCapacity() {
 		return seatCapacity;
 	}
 
-	public void setSeatCapacity(Integer seatCapacity) {
+	public void setSeatCapacity(Long seatCapacity) {
 		this.seatCapacity = seatCapacity;
 	}
 
@@ -75,7 +75,7 @@ public class Flight {
 		this.seatBooked = seatBooked;
 	}
 
-	public Flight(Long flightNumber, String carrierName, Long routeId, Integer seatCapacity, String departure,
+	public Flight(Long flightNumber, String carrierName, Long routeId, Long seatCapacity, String departure,
 			String arrival) {
 		super();
 		this.flightNumber = flightNumber;

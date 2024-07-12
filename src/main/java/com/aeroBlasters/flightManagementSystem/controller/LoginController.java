@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aeroBlasters.flightManagementSystem.bean.FlightUser;
 import com.aeroBlasters.flightManagementSystem.service.FlightUserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // this is for checks
 
@@ -52,6 +53,19 @@ public class LoginController {
 		newUser.setType(user.getType());
 		service.save(newUser);
 		return new ModelAndView("loginPage");
+	}
+
+	@GetMapping({ "/index", "/" })
+	public ModelAndView showIndexPage() {
+		String indexPage = "";
+		String userType = service.getType();
+		System.out.println("User Type: " + userType);
+		if (userType.equalsIgnoreCase("admin")) {
+			indexPage = "adminIndex";
+		} else if (userType.equalsIgnoreCase("customer")) {
+			indexPage = "customerIndex";
+		}
+		return new ModelAndView(indexPage);
 	}
 
 }

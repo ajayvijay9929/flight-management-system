@@ -78,39 +78,39 @@
                         Enter Passenger Details :
                         <table>
                             <tr>
-                                <td>Name : <input type="text" name="name1" value="--"></td>
+                                <td>Name : <input type="text" name="name1" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob1" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024" required></td>
+                                        placeholder="DD-MM-YYYY" required></td>
                             </tr>
 
                             <tr>
-                                <td>Name : <input type="text" name="name2" value="--"></td>
+                                <td>Name : <input type="text" name="name2" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob2" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024"></td>
+                                        placeholder="DD-MM-YYYY"></td>
                             </tr>
 
                             <tr>
-                                <td>Name : <input type="text" name="name3" value="--"></td>
+                                <td>Name : <input type="text" name="name3" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob3" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024"></td>
+                                        placeholder="DD-MM-YYYY"></td>
                             </tr>
 
                             <tr>
-                                <td>Name : <input type="text" name="name4" value="--"></td>
+                                <td>Name : <input type="text" name="name4" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob4" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024"></td>
+                                        placeholder="DD-MM-YYYY"></td>
                             </tr>
 
                             <tr>
-                                <td>Name : <input type="text" name="name5" value="--"></td>
+                                <td>Name : <input type="text" name="name5" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob5" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024"></td>
+                                        placeholder="DD-MM-YYYY"></td>
                             </tr>
 
                             <tr>
-                                <td>Name : <input type="text" name="name6" value="--"></td>
+                                <td>Name : <input type="text" name="name6" value="--" placeholder="John Doe"></td>
                                 <td>Date Of Birth : <input type="date" name="dob6" pattern="\d{1,2}-\d{1,2}-\d{4}"
-                                        placeholder="25-10-2024"></td>
+                                        placeholder="DD-MM-YYYY"></td>
                             </tr>
 
                         </table>
