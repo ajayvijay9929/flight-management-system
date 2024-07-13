@@ -53,11 +53,13 @@
                                     <th>Route Id</th>
                                     <th>Departure</th>
                                     <th>Arrival</th>
+                                    <th>Seat Available</th>
                                     <th>Fare</th>
                                     <th>Booking</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <c:forEach var="flight" items="${flightList}">
                                     <tr>
                                         <td>${flight.flightNumber}</td>
@@ -65,8 +67,10 @@
                                         <td>${flight.routeId}</td>
                                         <td>${flight.departure}</td>
                                         <td>${flight.arrival}</td>
-                                        <!-- need to fix -->
-                                        <td>5000</td>
+                                        <c:set var="seatAvailable" scope="session"
+                                            value="${flight.seatCapacity-flight.seatBooked}" />
+                                        <td>${seatAvailable}</td>
+                                        <td>${fare}</td>
                                         <td><a href="/ticket/${flight.flightNumber}"
                                                 class="btn btn-danger bookTicketLink"
                                                 flightNumber="${flight.flightNumber}"
