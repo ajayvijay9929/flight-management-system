@@ -10,4 +10,6 @@ public interface TicketDao {
     public Ticket findTicketByTicketNumber(Long ticketNumber);
 
     public void deleteTicketByTicketNumber(Long ticketNumber);
+
+    public void delete(Ticket ticket);
 }

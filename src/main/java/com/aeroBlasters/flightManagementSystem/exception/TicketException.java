@@ -1,13 +1,13 @@
 package com.aeroBlasters.flightManagementSystem.exception;
 
-public class RouteException extends RuntimeException {
+public class TicketException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     public static long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public RouteException(String message) {
+    public TicketException(String message) {
         super(message);
     }
 }

@@ -33,4 +33,9 @@ public class TicketDaoImpl implements TicketDao {
     public void deleteTicketByTicketNumber(Long ticketNumber) {
         repository.deleteTicketByTicketNumber(ticketNumber);
     }
+
+    @Override
+    public void delete(Ticket ticket) {
+        repository.delete(ticket);
+    }
 }

@@ -36,7 +36,7 @@
                 <div class="col-md-8 error-container">
                     <h1 class="error-title">Error</h1>
                     <p>${errorMessage}</p>
-                    <a href="/routeentrypage" class="btn btn-primary">Go Back</a>
+                    <a href="/airport" class="btn btn-primary">Go Back</a>
                 </div>
             </div>
         </div>

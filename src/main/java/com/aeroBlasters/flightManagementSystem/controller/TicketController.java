@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
+import com.aeroBlasters.flightManagementSystem.exception.TicketException;
 import com.aeroBlasters.flightManagementSystem.service.TicketService;
 
 @ControllerAdvice
@@ -101,6 +103,10 @@ public class TicketController {
             totalPassengers++;
             System.out.println("name " + pname + "dob " + pname);
         }
+        if (totalPassengers == 0) {
+            ticketDao.delete(ticket);
+            throw new TicketException("No passengers added to the ticket");
+        }
         ticket.setTotalAmount(totalAmount);
         ticketService.updateBookedSeats(ticket.getFlightNumber(), totalPassengers);
         ticketDao.save(ticket);
@@ -138,6 +144,14 @@ public class TicketController {
             mv.addObject("message", "Ticket Cancellation Failed");
         }
 
+        return mv;
+    }
+
+    @ExceptionHandler(value = TicketException.class)
+    public ModelAndView handlingTicketException(TicketException exception) {
+        String message = "Ticket Exception: " + exception.getMessage();
+        ModelAndView mv = new ModelAndView("ticketErrorPage");
+        mv.addObject("errorMessage", message);
         return mv;
     }
 }

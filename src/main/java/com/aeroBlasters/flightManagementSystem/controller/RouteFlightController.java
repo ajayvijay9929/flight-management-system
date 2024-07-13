@@ -17,6 +17,7 @@ import com.aeroBlasters.flightManagementSystem.bean.Route;
 import com.aeroBlasters.flightManagementSystem.dao.AirportDao;
 import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
+import com.aeroBlasters.flightManagementSystem.exception.FlightException;
 import com.aeroBlasters.flightManagementSystem.exception.RouteException;
 import com.aeroBlasters.flightManagementSystem.service.FlightService;
 import com.aeroBlasters.flightManagementSystem.service.RouteService;
@@ -49,7 +50,9 @@ public class RouteFlightController {
     public ModelAndView saveRoutes(@ModelAttribute("routeRecord") Route route1) {
         String source = route1.getSourceAirportCode().toUpperCase();
         String destination = route1.getDestinationAirportCode().toUpperCase();
-        // doubt in last is there is nothing writtten after airport
+        if (source.equalsIgnoreCase(destination))
+            throw new RouteException("From-City & To-City cannot be the same......");
+
         String sourceCode = airportDao.findAirportCodeByLocation(route1.getSourceAirportCode());
         System.out.println("source code is " + sourceCode);
         String destinationCode = airportDao.findAirportCodeByLocation(route1.getDestinationAirportCode());
@@ -84,6 +87,8 @@ public class RouteFlightController {
     public ModelAndView saveFlights(@ModelAttribute("flightRecord") Flight flight1, @RequestParam("dtime") String dtime,
             @RequestParam("atime") String atime) {
         Flight flight2 = flightService.createReturnFlight(flight1, dtime, atime);
+        if (flight1.getRouteId().equals(flight2.getRouteId()))
+            throw new FlightException("From-City & To-City cannot be the same......");
         flightDao.save(flight1);
         flightDao.save(flight2);
         return new ModelAndView("redirect:/index");
@@ -111,9 +116,13 @@ public class RouteFlightController {
         String fromAirport = airportDao.findAirportCodeByLocation(fromCity);
         String toAirport = airportDao.findAirportCodeByLocation(toCity);
         if (fromAirport.equalsIgnoreCase(toAirport))
-            throw new RouteException();
+            throw new FlightException("From-City & To-City cannot be the same......");
         Route route = routeDao.findRouteBySourceAndDestination(fromAirport, toAirport);
+        if (route == null)
+            throw new FlightException("No flights available for the selected route......");
         List<Flight> flightList = flightDao.findFlightsByRouteId(route.getRouteId());
+        if (flightList.isEmpty())
+            throw new FlightException("No flights available for the selected route......");
         ModelAndView mv = new ModelAndView("routeFlightShowPage");
         mv.addObject("flightList", flightList);
         mv.addObject("fromAirport", fromCity);
@@ -127,6 +136,15 @@ public class RouteFlightController {
     public ModelAndView handlingRouteException(RouteException exception) {
         String message = "From-City & To-City cannot be the same......";
         ModelAndView mv = new ModelAndView("routeErrorPage");
+        mv.addObject("errorMessage", message);
+        return mv;
+
+    }
+
+    @ExceptionHandler(value = FlightException.class)
+    public ModelAndView handlingFlightException(FlightException exception) {
+        String message = "Flight Exception: " + exception.getMessage();
+        ModelAndView mv = new ModelAndView("flightErrorPage");
         mv.addObject("errorMessage", message);
         return mv;
 
