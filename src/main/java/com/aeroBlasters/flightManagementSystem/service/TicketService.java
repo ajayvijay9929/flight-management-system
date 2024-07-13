@@ -96,4 +96,11 @@ public class TicketService {
         this.ticketDao = ticketDao;
         this.flightDao = flightDao;
     }
+
+    public void updateBookedSeats(Long flightNumber, Long totalPasssenger) {
+        System.out.println("Flight Number from updateBookedSeats: " + flightNumber);
+        Flight flight = flightDao.findFlightByFlightNumber(flightNumber);
+        flight.setSeatBooked(flight.getSeatBooked() + totalPasssenger);
+        flightDao.save(flight);
+    }
 }

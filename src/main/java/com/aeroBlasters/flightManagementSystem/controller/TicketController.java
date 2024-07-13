@@ -83,6 +83,7 @@ public class TicketController {
         Double basePrice = Double.parseDouble(request.getParameter("totalAmount"));
         String pname = "";
         String dob = "";
+        Long totalPassengers = 0L;
         for (int i = 1; i <= 6; i++) {
             pname = request.getParameter("name" + i);
             dob = request.getParameter("dob" + i);
@@ -97,9 +98,11 @@ public class TicketController {
             passengerDao.save(passenger);
             totalAmount += ticketService.calculateFinalTicketPrice(LocalDate.parse(dob).getYear(), basePrice,
                     totalSeats, bookedSeats);
+            totalPassengers++;
             System.out.println("name " + pname + "dob " + pname);
         }
         ticket.setTotalAmount(totalAmount);
+        ticketService.updateBookedSeats(ticket.getFlightNumber(), totalPassengers);
         ticketDao.save(ticket);
         List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
         mv.addObject("passengerList", passengerList);
