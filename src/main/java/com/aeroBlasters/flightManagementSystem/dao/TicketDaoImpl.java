@@ -1,5 +1,7 @@
 package com.aeroBlasters.flightManagementSystem.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -37,5 +39,10 @@ public class TicketDaoImpl implements TicketDao {
     @Override
     public void delete(Ticket ticket) {
         repository.delete(ticket);
+    }
+
+    @Override
+    public List<Ticket> findAllTickets() {
+        return repository.findAll();
     }
 }

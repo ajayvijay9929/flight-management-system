@@ -1,5 +1,7 @@
 package com.aeroBlasters.flightManagementSystem.dao;
 
+import java.util.List;
+
 import com.aeroBlasters.flightManagementSystem.bean.Ticket;
 
 public interface TicketDao {
@@ -12,4 +14,6 @@ public interface TicketDao {
     public void deleteTicketByTicketNumber(Long ticketNumber);
 
     public void delete(Ticket ticket);
+
+    public List<Ticket> findAllTickets();
 }

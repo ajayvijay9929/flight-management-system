@@ -124,6 +124,20 @@
                 </div>
             </div>
 
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Ticket</a>
+                <div class="dropdown-content">
+                    <a href="/tickets">All Tickets</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Passenger</a>
+                <div class="dropdown-content">
+                    <a href="/passengers">All Passengers</a>
+                </div>
+            </div>
+
             <div>
                 <a href="/loginpage">Logout</a>
             </div>

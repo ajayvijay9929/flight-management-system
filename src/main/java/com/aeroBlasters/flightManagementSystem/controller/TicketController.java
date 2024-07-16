@@ -26,6 +26,7 @@ import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
 import com.aeroBlasters.flightManagementSystem.exception.TicketException;
 import com.aeroBlasters.flightManagementSystem.service.TicketService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @ControllerAdvice
 @RestController
@@ -144,6 +145,24 @@ public class TicketController {
             mv.addObject("message", "Ticket Cancellation Failed");
         }
 
+        return mv;
+    }
+
+    @GetMapping("/tickets")
+    public ModelAndView showAllTickets() {
+        List<Ticket> ticketList = ticketDao.findAllTickets();
+        System.out.println("Ticket List: " + ticketList.size());
+        ModelAndView mv = new ModelAndView("ticketReportPage");
+        mv.addObject("ticketList", ticketList);
+        return mv;
+    }
+
+    @GetMapping("/passengers")
+    public ModelAndView showAllPassengers() {
+        List<Passenger> passengerList = passengerDao.findAllPassengers();
+        System.out.println("Passenger List: " + passengerList.size());
+        ModelAndView mv = new ModelAndView("passengerReportPage");
+        mv.addObject("passengerList", passengerList);
         return mv;
     }
 

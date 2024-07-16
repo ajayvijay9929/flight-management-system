@@ -43,4 +43,9 @@ public class PassengerDaoImpl implements PassengerDao {
     public void deletePassengerByTicketNumber(Long ticketNumber) {
         repository.deletePassengerByTicketNumber(ticketNumber);
     }
+
+    @Override
+    public List<Passenger> findAllPassengers() {
+        return repository.findAll();
+    }
 }
