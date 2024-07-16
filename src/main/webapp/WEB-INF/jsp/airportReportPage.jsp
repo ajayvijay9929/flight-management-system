@@ -17,11 +17,22 @@
                         background-repeat: no-repeat;
                         color: #fff;
                         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
                         margin: 0;
+                        padding: 0;
+                    }
+
+                    .navbar {
+                        background-color: rgba(17, 0, 253, 0.9);
+                        padding: 10px;
+                        position: fixed;
+                        width: 100%;
+                        z-index: 1000;
+                    }
+
+                    .navbar a {
+                        color: white;
+                        padding: 14px 20px;
+                        text-decoration: none;
                     }
 
                     .table-container {
@@ -29,8 +40,8 @@
                         padding: 30px;
                         border-radius: 10px;
                         box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-                        width: 100%;
-                        max-width: 800px;
+                        margin-top: 80px;
+                        /* Adjust margin for fixed navbar */
                     }
 
                     .table-container h1 {
@@ -58,7 +69,6 @@
                         margin-top: 20px;
                         display: inline-block;
                         color: #ffffff;
-                        text-decoration: none;
                     }
 
                     .home-link:hover {
@@ -96,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+
                 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
