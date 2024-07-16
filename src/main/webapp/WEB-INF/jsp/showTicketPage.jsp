@@ -10,18 +10,45 @@
                 <title>Ticket Confirmation</title>
                 <!-- Bootstrap CSS -->
                 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+                <style>
+                    body {
+                        background-color: #f8f9fa;
+                    }
+
+                    .card {
+                        border-radius: 10px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                    }
+
+                    .card-title {
+                        margin-bottom: 1rem;
+                        font-weight: bold;
+                        font-size: 1.25rem;
+                    }
+
+                    .btn-primary,
+                    .btn-danger {
+                        border-radius: 5px;
+                        padding: 10px 20px;
+                        font-size: 1em;
+                    }
+
+                    .btn-danger {
+                        margin-top: 20px;
+                    }
+                </style>
             </head>
 
             <body>
                 <div class="container mt-5">
-                    <h2 class="mb-4">Ticket Confirmation</h2>
+                    <h2 class="mb-4 text-center">Ticket Confirmation</h2>
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Booking Details</h5>
                             <p class="card-text"><strong>Ticket Number:</strong> ${ticketRecord.ticketNumber}</p>
                             <p class="card-text"><strong>Carrier Name:</strong> ${ticketRecord.carrierName}</p>
                             <p class="card-text"><strong>Flight Number:</strong> ${ticketRecord.flightNumber}</p>
-                            <p class="card-text"><strong>Route Id:</strong> ${ticketRecord.routeId}</p>
+                            <p class="card-text"><strong>Route ID:</strong> ${ticketRecord.routeId}</p>
                             <p class="card-text"><strong>Total Amount:</strong> ${ticketRecord.totalAmount}</p>
 
                             <h5 class="card-title">Passenger Details</h5>

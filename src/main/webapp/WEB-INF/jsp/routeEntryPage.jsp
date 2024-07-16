@@ -12,31 +12,64 @@
                 body {
                     font-family: Arial, sans-serif;
                     background-image: url('/images/flights.jpg');
-
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
                     background-color: #f8f9fa;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    margin: 0;
+                    color: #000000;
+                    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                 }
 
                 .form-container {
-                    margin-top: 50px;
                     padding: 30px;
-                    background-color: #fff;
+                    background-color: rgba(255, 255, 255, 0.9);
                     border-radius: 10px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                    width: 100%;
+                    max-width: 600px;
+                    margin: 50px 20px;
                 }
 
                 .form-title {
                     margin-bottom: 20px;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #333;
+                    text-shadow: none;
+                }
+
+                .form-group {
+                    margin-bottom: 15px;
                 }
 
                 .btn-custom {
                     width: 100px;
                     margin: 5px;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
                 }
 
                 .home-link {
                     margin-top: 20px;
                     display: block;
                     text-align: center;
+                    color: #007bff;
+                    text-decoration: none;
+                    text-shadow: none;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+                    padding: 10px 0;
+                    border-radius: 5px;
+                    background-color: #fff;
+                }
+
+                .home-link:hover {
+                    color: #0056b3;
+                    text-decoration: none;
+                    background-color: #f0f0f0;
                 }
             </style>
         </head>

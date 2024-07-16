@@ -12,23 +12,52 @@
                     font-family: Arial, sans-serif;
                     background-image: url('/images/flights.jpg');
                     /* Path to your background image */
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
                     background-color: #f8f9fa;
-
-
+                    color: #333;
+                    /* Default text color for better readability */
+                    min-height: 100vh;
+                    margin: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 .table-container {
                     margin-top: 50px;
-                    background-color: #fff;
+                    background-color: rgba(255, 255, 255, 0.95);
                     padding: 30px;
                     border-radius: 10px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    max-width: 800px;
+                    /* Limit width for larger screens */
                 }
 
                 .home-link {
                     margin-top: 20px;
                     display: block;
                     text-align: center;
+                    color: #007bff;
+                    /* Primary link color */
+                    text-decoration: none;
+                    font-weight: bold;
+                    padding: 10px;
+                    border-radius: 5px;
+                    background-color: #fff;
+                    /* Background for better visibility */
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                    transition: background-color 0.3s, color 0.3s;
+                    /* Smooth transition */
+                }
+
+                .home-link:hover {
+                    color: #0056b3;
+                    /* Darker shade on hover */
+                    background-color: #f0f0f0;
+                    /* Lighter shade on hover */
                 }
             </style>
         </head>

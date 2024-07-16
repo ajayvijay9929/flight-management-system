@@ -18,24 +18,59 @@
                     height: 100vh;
                     margin: 0;
                     background-color: #f8f9fa;
+                    color: #333;
+                    /* Default text color for readability */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
 
                 .details-container {
                     margin-top: 50px;
                     padding: 30px;
-                    background-color: #fff;
+                    background-color: rgba(255, 255, 255, 0.95);
+                    /* Slight transparency for a modern look */
                     border-radius: 10px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                    /* Deeper shadow for a lifted effect */
+                    width: 100%;
+                    max-width: 800px;
+                    /* Limit the width for larger screens */
                 }
 
                 .details-title {
                     margin-bottom: 20px;
+                    font-size: 24px;
+                    /* Larger title for emphasis */
+                    text-align: center;
+                    /* Centered title */
+                    color: #007bff;
+                    /* Primary color for the title */
                 }
 
                 .home-link {
                     margin-top: 20px;
                     display: block;
                     text-align: center;
+                    color: #007bff;
+                    /* Link color */
+                    text-decoration: none;
+                    font-weight: bold;
+                    padding: 10px 15px;
+                    border-radius: 5px;
+                    background-color: #fff;
+                    /* Background for visibility */
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                    /* Subtle shadow */
+                    transition: background-color 0.3s, color 0.3s;
+                    /* Smooth transition */
+                }
+
+                .home-link:hover {
+                    color: #fff;
+                    /* Change text color on hover */
+                    background-color: #007bff;
+                    /* Background color on hover */
                 }
             </style>
         </head>

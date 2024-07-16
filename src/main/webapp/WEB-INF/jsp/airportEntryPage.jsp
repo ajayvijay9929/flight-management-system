@@ -12,20 +12,35 @@
                 <style>
                     body {
                         background-color: #f8f9fa;
-                        font-family: Arial, sans-serif;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         background-image: url('/images/flights.jpg');
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        margin: 0;
+                        color: #070707;
+                        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
                     }
 
                     .form-container {
-                        margin-top: 50px;
+                        background-color: rgba(255, 255, 255, 0.9);
                         padding: 30px;
-                        background-color: #fff;
                         border-radius: 10px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                        width: 100%;
+                        max-width: 500px;
                     }
 
                     .form-title {
                         margin-bottom: 20px;
+                        font-weight: bold;
+                        font-size: 24px;
+                        color: #333;
+                        text-shadow: none;
                     }
 
                     .btn-custom {
@@ -37,6 +52,12 @@
                         margin-top: 20px;
                         display: block;
                         text-align: center;
+                        color: #333;
+                    }
+
+                    .home-link:hover {
+                        text-decoration: none;
+                        color: #007bff;
                     }
                 </style>
             </head>

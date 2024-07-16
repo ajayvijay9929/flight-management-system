@@ -10,41 +10,60 @@
                 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
                 <style>
                     body {
-                        font-family: Arial, sans-serif;
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                         background-image: url('/images/flights.jpg');
-
-                        background-color: #f8f9fa;
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        color: #fff;
+                        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100vh;
+                        margin: 0;
                     }
 
-                    .form-container {
-                        margin-top: 50px;
+                    .table-container {
+                        background-color: rgba(255, 255, 255, 0.9);
                         padding: 30px;
-                        background-color: #fff;
                         border-radius: 10px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+                        width: 100%;
+                        max-width: 800px;
                     }
 
-                    .form-title {
-                        margin-bottom: 20px;
+                    .table-container h1 {
+                        color: #333;
+                        text-shadow: none;
+                        margin-bottom: 30px;
                     }
 
-                    .btn-custom {
-                        width: 100px;
-                        margin: 5px;
+                    .table thead th {
+                        background-color: #007bff;
+                        color: #fff;
+                    }
+
+                    .btn-info {
+                        background-color: #007bff;
+                        border-color: #007bff;
+                    }
+
+                    .btn-info:hover {
+                        background-color: #0056b3;
+                        border-color: #0056b3;
                     }
 
                     .home-link {
                         margin-top: 20px;
-                        display: block;
-                        text-align: center;
+                        display: inline-block;
+                        color: #ffffff;
+                        text-decoration: none;
                     }
 
-                    .table-container {
-                        margin-top: 50px;
-                        background-color: #fff;
-                        padding: 30px;
-                        border-radius: 10px;
-                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    .home-link:hover {
+                        color: #ffffff;
+                        text-decoration: none;
                     }
                 </style>
             </head>
