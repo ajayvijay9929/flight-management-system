@@ -12,6 +12,14 @@ public class FlightService {
     @Autowired
     private RouteDao routeDao;
 
+    /**
+     * Creates a return flight based on the provided flight details and times.
+     * 
+     * @param flight the flight to base the return flight on.
+     * @param dtime  the departure time of the return flight.
+     * @param atime  the arrival time of the return flight.
+     * @return a new Flight object representing the return flight.
+     */
     public Flight createReturnFlight(Flight flight, String dtime, String atime) {
         Long newId = flight.getFlightNumber() + 1;
         Route route = routeDao.findRouteById(flight.getRouteId());
