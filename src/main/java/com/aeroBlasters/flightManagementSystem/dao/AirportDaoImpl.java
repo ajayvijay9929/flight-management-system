@@ -1,44 +1,47 @@
-
 package com.aeroBlasters.flightManagementSystem.dao;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.aeroBlasters.flightManagementSystem.bean.Airport;
 
+/**
+ * Implementation of the AirportDao interface.
+ * <p>
+ * This class provides concrete implementations of the methods
+ * defined in the AirportDao interface using the AirportRepository.
+ * </p>
+ */
 @Repository
-@Service
 public class AirportDaoImpl implements AirportDao {
+
 	@Autowired
 	private AirportRepository repository;
 
 	@Override
 	public void addAirport(Airport airport) {
-		repository.save(airport);
+		repository.save(airport); // Save the airport entity to the database
 	}
 
 	@Override
 	public List<Airport> findAllAirports() {
-		return repository.findAll();
+		return repository.findAll(); // Retrieve all airports from the database
 	}
 
 	@Override
 	public Airport findAirportById(String id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElse(null); // Find an airport by its code, return null if not found
 	}
 
 	@Override
 	public List<String> findAllAirportLocations() {
-		return repository.findAllAirportLocations();
+		return repository.findAllAirportLocations(); // Retrieve all airport locations
 	}
 
 	@Override
 	public String findAirportCodeByLocation(String airportLocation) {
-		// TODO Auto-generated method stub
-		return repository.findAirportCodeByLocation(airportLocation);
+		return repository.findAirportCodeByLocation(airportLocation); // Find airport code by location
 	}
-
 }
