@@ -9,7 +9,6 @@ public class Airport {
 	private String airportCode;
 	private String airportLocation;
 
-	/// today work
 	// Default constructor
 	public Airport() {
 		super();

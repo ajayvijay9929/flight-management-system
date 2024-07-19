@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import java.time.LocalDate; // Import for LocalDate
+import java.time.LocalDate;
 
 @Entity
 public class Passenger {
@@ -16,17 +16,18 @@ public class Passenger {
     private String passengerName;
     private Integer passengerAge;
     private Double fare;
-    private String dob; // Date of Birth field
+    private String dob;
 
     @ManyToOne
     @JoinColumn(name = "ticket_id", nullable = false)
     private Ticket ticket;
 
+    // Default constructor
     public Passenger() {
         super();
     }
 
-    // Getters and setters for all fields including ticket
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -59,16 +60,6 @@ public class Passenger {
         this.fare = fare;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    // Removed setName method as it's redundant with setPassengerName
-
     public String getDob() {
         return dob;
     }
@@ -77,5 +68,11 @@ public class Passenger {
         this.dob = dob;
     }
 
-    // Removed setDob(String dob) method as we now use LocalDate for dob
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
 }

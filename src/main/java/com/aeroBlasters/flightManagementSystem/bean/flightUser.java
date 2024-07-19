@@ -14,30 +14,25 @@ public class FlightUser extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	// @Column(name = "user_name")
 	private String username;
 	private String password;
 	private String type;
 
-	/*
-	 * public flightUser() {
-	 * //super("abc","pqr",new ArrayList<>());
-	 * }
-	 */
+	// Default constructor
 	public FlightUser() {
 		super("abc", "pqr", new ArrayList<>());
-		// TODO Auto-generated constructor stub
 	}
 
+	// Parameterized constructor
 	public FlightUser(String username, String password, java.util.Collection<? extends GrantedAuthority> authorities,
 			String username2, String password2, String type2) {
 		super(username, password, authorities);
 		this.username = username2;
 		this.password = password2;
 		this.type = type2;
-
 	}
 
+	// Getters and Setters
 	public String getUsername() {
 		return username;
 	}
@@ -64,6 +59,6 @@ public class FlightUser extends User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "flightUser [username=" + username + ", password=" + password + ", type=" + type + "]";
+		return "FlightUser [username=" + username + ", password=" + password + ", type=" + type + "]";
 	}
 }

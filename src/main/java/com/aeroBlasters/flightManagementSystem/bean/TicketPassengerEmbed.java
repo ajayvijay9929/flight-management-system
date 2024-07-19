@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Embeddable;
-// import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.NotFound;
 
 @Embeddable
@@ -17,7 +15,6 @@ public class TicketPassengerEmbed implements Serializable {
 
     public TicketPassengerEmbed() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
     public TicketPassengerEmbed(Long ticketNumber, Integer serialNumber) {

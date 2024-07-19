@@ -11,6 +11,7 @@ public class Route {
 	private String destinationAirportCode;
 	private Double fare;
 
+	// Parameterized constructor
 	public Route(Long routeId, String sourceAirportCode, String destinationAirportCode, Double fare) {
 		super();
 		this.routeId = routeId;
@@ -19,10 +20,12 @@ public class Route {
 		this.fare = fare;
 	}
 
+	// Default constructor
 	public Route() {
 		super();
 	}
 
+	// Getters and Setters
 	public Long getRouteId() {
 		return routeId;
 	}
@@ -54,5 +57,4 @@ public class Route {
 	public void setFare(Double fare) {
 		this.fare = fare;
 	}
-
 }

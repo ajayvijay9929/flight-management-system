@@ -1,4 +1,3 @@
-
 package com.aeroBlasters.flightManagementSystem.bean;
 
 import javax.persistence.Entity;
@@ -15,10 +14,25 @@ public class Flight {
 	private String arrival;
 	private Long seatBooked;
 
+	// Default constructor
 	public Flight() {
 		super();
 	}
 
+	// Parameterized constructor
+	public Flight(Long flightNumber, String carrierName, Long routeId, Long seatCapacity, String departure,
+			String arrival) {
+		super();
+		this.flightNumber = flightNumber;
+		this.carrierName = carrierName;
+		this.routeId = routeId;
+		this.seatCapacity = seatCapacity;
+		this.departure = departure;
+		this.arrival = arrival;
+		this.seatBooked = 0L;
+	}
+
+	// Getters and Setters
 	public Long getFlightNumber() {
 		return flightNumber;
 	}
@@ -74,17 +88,4 @@ public class Flight {
 	public void setSeatBooked(Long seatBooked) {
 		this.seatBooked = seatBooked;
 	}
-
-	public Flight(Long flightNumber, String carrierName, Long routeId, Long seatCapacity, String departure,
-			String arrival) {
-		super();
-		this.flightNumber = flightNumber;
-		this.carrierName = carrierName;
-		this.routeId = routeId;
-		this.seatCapacity = seatCapacity;
-		this.departure = departure;
-		this.arrival = arrival;
-		this.seatBooked = 0L;
-	}
-
 }

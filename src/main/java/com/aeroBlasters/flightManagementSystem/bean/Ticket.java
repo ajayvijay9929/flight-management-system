@@ -12,10 +12,22 @@ public class Ticket {
     private String carrierName;
     private Double totalAmount;
 
+    // Default constructor
     public Ticket() {
         super();
     }
 
+    // Parameterized constructor
+    public Ticket(Long ticketNumber, Long routeId, Long flightNumber, String carrierName, Double totalAmount) {
+        super();
+        this.ticketNumber = ticketNumber;
+        this.routeId = routeId;
+        this.flightNumber = flightNumber;
+        this.carrierName = carrierName;
+        this.totalAmount = totalAmount;
+    }
+
+    // Getters and Setters
     public Long getTicketNumber() {
         return ticketNumber;
     }
@@ -53,15 +65,6 @@ public class Ticket {
     }
 
     public void setTotalAmount(Double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public Ticket(Long ticketNumber, Long routeId, Long flightNumber, String carrierName, Double totalAmount) {
-        super();
-        this.ticketNumber = ticketNumber;
-        this.routeId = routeId;
-        this.flightNumber = flightNumber;
-        this.carrierName = carrierName;
         this.totalAmount = totalAmount;
     }
 }
