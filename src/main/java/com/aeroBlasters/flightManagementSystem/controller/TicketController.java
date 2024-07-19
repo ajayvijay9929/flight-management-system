@@ -31,19 +31,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @ControllerAdvice
 @RestController
 public class TicketController {
-
     @Autowired
     private TicketDao ticketDao;
-
     @Autowired
     private FlightDao flightDao;
-
     @Autowired
     private RouteDao routeDao;
-
     @Autowired
     private PassengerDao passengerDao;
-
     @Autowired
     private TicketService ticketService;
 
@@ -69,7 +64,6 @@ public class TicketController {
         ticket.setTicketNumber(ticketNumber);
         System.out.println("Ticket Number: " + ticket.getTicketNumber());
 
-        // Save the ticket first
         ticketDao.save(ticket);
 
         Double totalAmount = 0.0;

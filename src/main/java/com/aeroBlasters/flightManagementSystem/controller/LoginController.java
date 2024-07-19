@@ -12,8 +12,6 @@ import com.aeroBlasters.flightManagementSystem.bean.FlightUser;
 import com.aeroBlasters.flightManagementSystem.service.FlightUserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// this is for checks
-
 @RestController
 public class LoginController {
 
@@ -23,7 +21,7 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder bCrypt;
 
-	// this is for signup
+	// Displays the registration page for new users
 	@GetMapping("/register")
 	public ModelAndView showUserRegisterPage() {
 		FlightUser user = new FlightUser();
@@ -32,21 +30,22 @@ public class LoginController {
 		return mv;
 	}
 
-	// this is for login page
+	// Displays the login page
 	@GetMapping("/loginpage")
 	public ModelAndView showloginPage() {
-
 		return new ModelAndView("loginPage");
 	}
 
+	// Displays the login error page
 	@GetMapping("/loginErrorPage")
 	public ModelAndView showloginErrorPage() {
 		return new ModelAndView("loginErrorPage");
 	}
 
+	// Handles user registration and encrypts the password
 	@PostMapping("/register")
 	public ModelAndView saveUserRegistrationPage(@ModelAttribute("userRecord") FlightUser user) {
-		String encodedPassword = bCrypt.encode(user.getPassword()); // encryptes the password
+		String encodedPassword = bCrypt.encode(user.getPassword()); // Encrypts the password
 		FlightUser newUser = new FlightUser();
 		newUser.setUsername(user.getUsername());
 		newUser.setPassword(encodedPassword);
@@ -55,6 +54,7 @@ public class LoginController {
 		return new ModelAndView("loginPage");
 	}
 
+	// Displays the index page based on user type (admin or customer)
 	@GetMapping({ "/index", "/" })
 	public ModelAndView showIndexPage() {
 		String indexPage = "";
@@ -67,5 +67,4 @@ public class LoginController {
 		}
 		return new ModelAndView(indexPage);
 	}
-
 }

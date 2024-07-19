@@ -25,6 +25,7 @@ import com.aeroBlasters.flightManagementSystem.service.RouteService;
 @ControllerAdvice
 @RestController
 public class RouteFlightController {
+
     @Autowired
     private RouteDao routeDao;
     @Autowired
@@ -36,6 +37,7 @@ public class RouteFlightController {
     @Autowired
     private FlightService flightService;
 
+    // Displays the route entry page with a new route ID
     @GetMapping("/routeEntryPage")
     public ModelAndView showRouteEntryPage() {
         Long newRouteId = routeDao.generateRouteId();
@@ -46,6 +48,7 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Saves a new route and its return route to the database
     @PostMapping("/route")
     public ModelAndView saveRoutes(@ModelAttribute("routeRecord") Route route1) {
         String source = route1.getSourceAirportCode().toUpperCase();
@@ -65,6 +68,7 @@ public class RouteFlightController {
         return new ModelAndView("redirect:/index");
     }
 
+    // Displays a report page with a list of all routes
     @GetMapping("/routes")
     public ModelAndView showRouteReportPage() {
         List<Route> routeList = routeDao.findAllRoutes();
@@ -73,6 +77,7 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Displays the flight entry page with a list of route IDs
     @GetMapping("/flight")
     public ModelAndView showFlightEntryPage() {
         List<Long> routeList = routeDao.findAllRoutesId();
@@ -83,6 +88,7 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Saves a new flight and its return flight to the database
     @PostMapping("/flight")
     public ModelAndView saveFlights(@ModelAttribute("flightRecord") Flight flight1, @RequestParam("dtime") String dtime,
             @RequestParam("atime") String atime) {
@@ -94,6 +100,7 @@ public class RouteFlightController {
         return new ModelAndView("redirect:/index");
     }
 
+    // Displays a report page with a list of all flights
     @GetMapping("/flights")
     public ModelAndView showFlightReportPage() {
         List<Flight> flightList = flightDao.findAllFlights();
@@ -102,6 +109,7 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Displays a page to select a route for flight search
     @GetMapping("/searchflight")
     public ModelAndView showRouteSelectPage() {
         List<String> airportList = airportDao.findAllAirportLocations();
@@ -110,6 +118,7 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Displays a page with flights for the selected route
     @PostMapping("/searchflight")
     public ModelAndView showRouteFlightsPage(@RequestParam("from_city") String fromCity,
             @RequestParam("to_city") String toCity) {
@@ -129,24 +138,25 @@ public class RouteFlightController {
         mv.addObject("toAirport", toCity);
         mv.addObject("fare", route.getFare());
         return mv;
-
     }
 
+    // Handles RouteException and redirects to the route error page with the error
+    // message
     @ExceptionHandler(value = RouteException.class)
     public ModelAndView handlingRouteException(RouteException exception) {
         String message = "From-City & To-City cannot be the same......";
         ModelAndView mv = new ModelAndView("routeErrorPage");
-        mv.addObject("errorMessage", message);
+        mv.addObject("routeError", message);
         return mv;
-
     }
 
+    // Handles FlightException and redirects to the flight error page with the error
+    // message
     @ExceptionHandler(value = FlightException.class)
     public ModelAndView handlingFlightException(FlightException exception) {
-        String message = "Flight Exception: " + exception.getMessage();
+        String message = "From-City & To-City cannot be the same......";
         ModelAndView mv = new ModelAndView("flightErrorPage");
-        mv.addObject("errorMessage", message);
+        mv.addObject("flightError", message);
         return mv;
-
     }
 }
