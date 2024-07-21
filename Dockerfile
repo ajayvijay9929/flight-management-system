@@ -1,27 +1,29 @@
-# Use an official Maven image with Java 11 as the base image
-FROM maven:3.8.4-openjdk-11 as build
+# Stage 1: Build the application
+# Use Maven with Java 17 for building the application
+FROM maven:3.8.4-openjdk-17 as build
 
 # Set the working directory in the Docker image
 WORKDIR /app
 
-# Copy the Maven wrapper and pom.xml file
-COPY mvnw pom.xml ./
-COPY .mvn .mvn
+# Copy the Maven configuration file and source code
+COPY pom.xml ./
+COPY src ./src
 
-# Ensure mvnw is executable
-RUN chmod +x mvnw
+# Build the application using Maven, skipping tests to speed up the build
+RUN mvn package -DskipTests
 
-# Copy the source code
-COPY src src
+# Stage 2: Create the runtime image
+# Use Tomcat with OpenJDK 17 as the base image
+FROM tomcat:9.0-jdk17-openjdk-slim
 
-# Build the application
-RUN ./mvnw package -DskipTests
+# Remove default web applications deployed in Tomcat
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# For the final image, use an OpenJDK image
-FROM openjdk:11-jre-slim
+# Copy the WAR file from the build stage to the Tomcat webapps directory
+COPY --from=build /app/target/flightManagementSystem-*.war /usr/local/tomcat/webapps/ROOT.war
 
-# Copy the built application from the build image
-COPY --from=build /app/target/*.jar app.jar
+# Tomcat exposes port 8080
+EXPOSE 8080
 
-# Command to run the application
-CMD ["java", "-jar", "/app.jar"]
+# Start Tomcat server
+CMD ["catalina.sh", "run"]
