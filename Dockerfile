@@ -1,29 +1,22 @@
-# Stage 1: Build the application
-# Use Maven with Java 17 for building the application
-FROM maven:3.8.4-openjdk-17 as build
+# Use the official OpenJDK 17 image as the base image
+FROM openjdk:17-jdk-alpine
 
-# Set the working directory in the Docker image
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven configuration file and source code
-COPY pom.xml ./
-COPY src ./src
+# Copy the Maven build files to the container
+COPY ./pom.xml ./pom.xml
+COPY ./src ./src
 
-# Build the application using Maven, skipping tests to speed up the build
-RUN mvn package -DskipTests
+# Install Maven and build the application
+RUN apk add --no-cache maven && \
+    mvn -B -f pom.xml clean package
 
-# Stage 2: Create the runtime image
-# Use Tomcat with OpenJDK 17 as the base image
-FROM tomcat:9.0-jdk17-openjdk-slim
+# Copy the built JAR file to the container
+COPY target/flight-management-system-0.0.1-SNAPSHOT.jar app.jar
 
-# Remove default web applications deployed in Tomcat
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-# Copy the WAR file from the build stage to the Tomcat webapps directory
-COPY --from=build /app/target/flightManagementSystem-*.war /usr/local/tomcat/webapps/ROOT.war
-
-# Tomcat exposes port 8080
+# Expose the port the application runs on
 EXPOSE 8080
 
-# Start Tomcat server
-CMD ["catalina.sh", "run"]
+# Command to run the application
+ENTRYPOINT ["java","-jar","app.jar"]
