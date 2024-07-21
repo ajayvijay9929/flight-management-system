@@ -80,8 +80,10 @@ buildNumber.properties
 # /src/main/resources/application*.yml
 
 # Spring Boot generated folder containing static resources
-/src/main/resources/static/
+# /src/main/resources/static
 
 # Spring Boot generated folder containing compiled classes
 /target/
 
+
+/src/main/resources/.env
