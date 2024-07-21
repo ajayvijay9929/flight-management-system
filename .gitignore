@@ -76,8 +76,8 @@ buildNumber.properties
 
 # Spring Boot specific
 # Application-specific files (e.g., `application.properties` or `application.yml`)
-/src/main/resources/application*.properties
-/src/main/resources/application*.yml
+# /src/main/resources/application*.properties
+# /src/main/resources/application*.yml
 
 # Spring Boot generated folder containing static resources
 /src/main/resources/static/
