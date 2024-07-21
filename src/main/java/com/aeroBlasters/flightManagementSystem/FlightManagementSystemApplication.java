@@ -3,6 +3,8 @@ package com.aeroBlasters.flightManagementSystem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 /**
  * Main entry point for the Flight Management System application.
  * 
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class FlightManagementSystemApplication {
+
+	Dotenv dotenv = Dotenv.load();
 
 	/**
 	 * Main method to start the Flight Management System application.
