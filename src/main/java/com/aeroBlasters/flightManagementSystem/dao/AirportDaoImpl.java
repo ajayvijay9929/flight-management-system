@@ -44,4 +44,9 @@ public class AirportDaoImpl implements AirportDao {
 	public String findAirportCodeByLocation(String airportLocation) {
 		return repository.findAirportCodeByLocation(airportLocation); // Find airport code by location
 	}
+
+	@Override
+	public void updateAirport(Airport airport) {
+		repository.save(airport); // Update the airport entity in the databased
+	}
 }

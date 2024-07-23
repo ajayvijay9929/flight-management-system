@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -99,6 +100,51 @@ public class AirportController {
 			return mv;
 		} catch (Exception e) {
 			throw new AirportException("Error displaying airport: " + e.getMessage());
+		}
+	}
+
+	@GetMapping("/updateairport/{id}")
+	public ModelAndView showUpdateAirportPage(@PathVariable("id") String id) {
+		try {
+			// Find the airport by ID
+			Airport airport = airportDao.findAirportById(id.toUpperCase());
+			if (airport == null) {
+				throw new AirportException("Airport with ID " + id + " not found.");
+			}
+			ModelAndView mv = new ModelAndView("airportUpdatePage");
+			mv.addObject("airport", airport);
+			return mv;
+		} catch (Exception e) {
+			throw new AirportException("Error displaying airport: " + e.getMessage());
+		}
+	}
+
+	@PostMapping("/updateairport")
+	public ModelAndView updateAirport(@ModelAttribute("airport") Airport airport) {
+		try {
+			// Convert airport code to uppercase
+			String str = airport.getAirportCode().toUpperCase();
+			airport.setAirportCode(str);
+
+			// Convert airport location to uppercase
+			String stg = airport.getAirportLocation().toUpperCase();
+			airport.setAirportLocation(stg);
+
+			// Validate airport code length
+			if (airport.getAirportCode().length() != 3) {
+				throw new AirportException("Airport code must be 3 characters long.");
+			}
+
+			// Validate airport location length
+			if (airport.getAirportLocation().length() < 3) {
+				throw new AirportException("Airport location must be at least 3 characters long.");
+			}
+
+			// Save the airport details to the database
+			airportDao.updateAirport(airport);
+			return new ModelAndView("redirect:/index");
+		} catch (Exception e) {
+			throw new AirportException("Error updating airport: " + e.getMessage());
 		}
 	}
 

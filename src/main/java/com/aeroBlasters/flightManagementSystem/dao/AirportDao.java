@@ -49,4 +49,6 @@ public interface AirportDao {
     * @return the airport code for the specified location.
     */
    public String findAirportCodeByLocation(String airportLocation);
+
+   public void updateAirport(Airport airport);
 }
