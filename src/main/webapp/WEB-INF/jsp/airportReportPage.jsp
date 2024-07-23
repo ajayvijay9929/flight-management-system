@@ -88,8 +88,8 @@
                                     <tr>
                                         <th>Airport Code</th>
                                         <th>Airport Location</th>
-                                        <th>Update Info</th>
                                         <th>Enquire</th>
+                                        <th>Update</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
@@ -98,12 +98,12 @@
                                         <tr>
                                             <td>${airport.airportCode}</td>
                                             <td>${airport.airportLocation}</td>
-                                            <td><a href="/updateairport/${airport.airportCode}"
-                                                    class="btn btn-secondary">Modify</a></td>
                                             <td><a href="/airport/${airport.airportCode}"
                                                     class="btn btn-info">Enquire</a></td>
+                                            <td><a href="/updateairport/${airport.airportCode}"
+                                                    class="btn btn-secondary">Modify</a></td>
                                             <td><a href="/deleteairport/${airport.airportCode}"
-                                                    class="btn btn-info">Remove</a></td>
+                                                    class="btn btn-danger">Remove</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
