@@ -3,12 +3,14 @@ package com.aeroBlasters.flightManagementSystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -163,6 +165,37 @@ public class AirportController {
 			return mv;
 		} catch (Exception e) {
 			throw new AirportException("Error displaying airport report page: " + e.getMessage());
+		}
+	}
+
+	@GetMapping("/deleteairport/{id}")
+	public ModelAndView showDeleteAirportPage(@PathVariable("id") String id) {
+		try {
+			// Find the airport by ID
+			Airport airport = airportDao.findAirportById(id.toUpperCase());
+			if (airport == null) {
+				throw new AirportException("Airport with ID " + id + " not found.");
+			}
+			ModelAndView mv = new ModelAndView("airportDeletePage");
+			mv.addObject("airport", airport);
+			return mv;
+		} catch (Exception e) {
+			throw new AirportException("Error displaying airport: " + e.getMessage());
+		}
+	}
+
+	// Delete the airport
+	@PostMapping("/deleteairport")
+	public ModelAndView deleteAirport(@RequestParam("airportCode") String airportCode) {
+		try {
+			Airport airport = airportDao.findAirportById(airportCode.toUpperCase());
+			if (airport == null) {
+				throw new AirportException("Airport not found.");
+			}
+			airportDao.deleteAirport(airport);
+			return new ModelAndView("redirect:/index");
+		} catch (Exception e) {
+			throw new AirportException("Error deleting airport: " + e.getMessage());
 		}
 	}
 

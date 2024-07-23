@@ -51,4 +51,6 @@ public interface AirportDao {
    public String findAirportCodeByLocation(String airportLocation);
 
    public void updateAirport(Airport airport);
+
+   public void deleteAirport(Airport airport);
 }

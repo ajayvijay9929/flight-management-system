@@ -49,4 +49,9 @@ public class AirportDaoImpl implements AirportDao {
 	public void updateAirport(Airport airport) {
 		repository.save(airport); // Update the airport entity in the databased
 	}
+
+	@Override
+	public void deleteAirport(Airport airport) {
+		repository.delete(airport); // Delete the airport entity from the database
+	}
 }
