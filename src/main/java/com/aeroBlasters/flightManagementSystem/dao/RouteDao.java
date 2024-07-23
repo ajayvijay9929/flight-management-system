@@ -57,4 +57,6 @@ public interface RouteDao {
     * @return a list of all route IDs.
     */
    public List<Long> findAllRoutesId();
+
+   public void deleteRoute(Route route);
 }

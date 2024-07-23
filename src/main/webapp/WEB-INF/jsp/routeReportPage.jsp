@@ -74,6 +74,8 @@
                                     <th>Source Code</th>
                                     <th>Destination Code</th>
                                     <th>Route Fare</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -83,6 +85,10 @@
                                         <td>${route.sourceAirportCode}</td>
                                         <td>${route.destinationAirportCode}</td>
                                         <td>${route.fare}</td>
+                                        <td><a href="/updateroute/${route.routeId}" class="btn btn-secondary">Modify</a>
+                                        </td>
+                                        <td><a href="/deleteroute/${route.routeId}" class="btn btn-danger">Remove</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

@@ -58,4 +58,14 @@ public class RouteDaoImpl implements RouteDao {
 	public List<Long> findAllRoutesId() {
 		return repository.findAllRoutesId(); // Retrieve all route IDs from the database
 	}
+
+	// @Override
+	// public void updateRoute(Route route) {
+	// repository.save(route); // Update the route entity in the database
+	// }
+
+	@Override
+	public void deleteRoute(Route route) {
+		repository.delete(route); // Delete the route entity from the database
+	}
 }

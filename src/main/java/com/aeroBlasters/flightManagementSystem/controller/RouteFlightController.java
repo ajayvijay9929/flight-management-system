@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -66,6 +67,74 @@ public class RouteFlightController {
         routeDao.save(route1);
         routeDao.save(route2);
         return new ModelAndView("redirect:/index");
+    }
+
+    @GetMapping("/updateroute/{routeId}")
+    public ModelAndView showRouteUpdatePage(@PathVariable("routeId") Long routeId) {
+        try {
+            Route route = routeDao.findRouteById(routeId);
+            if (route == null)
+                throw new RouteException("Route not found......");
+            ModelAndView mv = new ModelAndView("routeUpdatePage");
+            mv.addObject("routeRecord", route);
+            mv.addObject("sourceAirport", airportDao.findAirportById(route.getSourceAirportCode()));
+            mv.addObject("destinationAirport", airportDao.findAirportById(route.getDestinationAirportCode()));
+            airportDao.findAirportById(route.getSourceAirportCode());
+            return mv;
+        } catch (Exception e) {
+            throw new RouteException("Error displaying route update page: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/updateroute")
+    public ModelAndView updateRoute(@ModelAttribute("routeRecord") Route route, @RequestParam("routeId") Long routeId) {
+        try {
+            Route route1 = routeDao.findRouteById(routeId);
+            if (route1 == null)
+                throw new RouteException("Route not found......");
+            String source = route.getSourceAirportCode().toUpperCase();
+            String destination = route.getDestinationAirportCode().toUpperCase();
+            if (source.equalsIgnoreCase(destination))
+                throw new RouteException("From-City & To-City cannot be the same......");
+            String sourceCode = airportDao.findAirportCodeByLocation(route.getSourceAirportCode());
+            String destinationCode = airportDao.findAirportCodeByLocation(route.getDestinationAirportCode());
+            route.setSourceAirportCode(sourceCode);
+            route.setDestinationAirportCode(destinationCode);
+            routeDao.save(route);
+            return new ModelAndView("redirect:/index");
+        } catch (Exception e) {
+            throw new RouteException("Error updating route: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/deleteroute/{routeId}")
+    public ModelAndView showDeleteRoute(@PathVariable("routeId") Long routeId) {
+        try {
+            Route route = routeDao.findRouteById(routeId);
+            if (route == null)
+                throw new RouteException("Route not found......");
+            // routeDao.deleteRoute(route);
+            ModelAndView mv = new ModelAndView("routeDeletePage");
+            mv.addObject("routeRecord", route);
+            mv.addObject("sourceAirport", airportDao.findAirportById(route.getSourceAirportCode()));
+            mv.addObject("destinationAirport", airportDao.findAirportById(route.getDestinationAirportCode()));
+            return mv;
+        } catch (Exception e) {
+            throw new RouteException("Error deleting route: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/deleteroute")
+    public ModelAndView deleteRoute(@RequestParam("routeId") Long routeId) {
+        try {
+            Route route = routeDao.findRouteById(routeId);
+            if (route == null)
+                throw new RouteException("Route not found......");
+            routeDao.deleteRoute(route);
+            return new ModelAndView("redirect:/index");
+        } catch (Exception e) {
+            throw new RouteException("Error deleting route: " + e.getMessage());
+        }
     }
 
     // Displays a report page with a list of all routes
