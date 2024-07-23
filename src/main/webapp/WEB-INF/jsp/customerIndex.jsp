@@ -156,6 +156,12 @@
                     <a href="/searchflight">Flight Search</a>
                 </div>
             </div>
+            <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">My Bookings</a>
+                <div class="dropdown-content">
+                    <a href="/mytickets">Flight Tickets</a>
+                </div>
+            </div>
             <div class="logout-btn">
                 <a href="/loginpage" class="btn btn-danger">Logout</a>
             </div>

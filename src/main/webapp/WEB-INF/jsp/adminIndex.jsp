@@ -160,6 +160,12 @@
                 </div>
             </div>
             <div class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">My Bookings</a>
+                <div class="dropdown-content">
+                    <a href="/mytickets">Flight Tickets</a>
+                </div>
+            </div>
+            <div class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Ticket</a>
                 <div class="dropdown-content">
                     <a href="/tickets">All Tickets</a>
@@ -194,7 +200,8 @@
             <div class="feature">
                 <i class="fas fa-user-friends"></i>
                 <h3>Manage Passengers</h3>
-                <p>Keep track of passenger information, manage bookings, and ensure a seamless travel experience.</p>
+                <p>Keep track of passenger information, manage bookings, and ensure a seamless travel experience.
+                </p>
             </div>
         </div>
 

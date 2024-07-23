@@ -55,4 +55,6 @@ public interface TicketDao {
      * @return a list of all Ticket entities.
      */
     public List<Ticket> findAllTickets();
+
+    public List<Ticket> findTicketsByUsername(String username);
 }

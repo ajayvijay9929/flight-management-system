@@ -1,11 +1,14 @@
 package com.aeroBlasters.flightManagementSystem.controller;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +23,7 @@ import com.aeroBlasters.flightManagementSystem.bean.Flight;
 import com.aeroBlasters.flightManagementSystem.bean.Passenger;
 import com.aeroBlasters.flightManagementSystem.bean.Route;
 import com.aeroBlasters.flightManagementSystem.bean.Ticket;
+import com.aeroBlasters.flightManagementSystem.dao.AirportDao;
 import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
@@ -27,6 +31,11 @@ import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
 import com.aeroBlasters.flightManagementSystem.exception.TicketException;
 import com.aeroBlasters.flightManagementSystem.service.TicketService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+import java.util.List;
 
 @ControllerAdvice
 @RestController
@@ -39,6 +48,8 @@ public class TicketController {
     private RouteDao routeDao;
     @Autowired
     private PassengerDao passengerDao;
+    @Autowired
+    private AirportDao airportDao;
     @Autowired
     private TicketService ticketService;
 
@@ -64,6 +75,10 @@ public class TicketController {
         ticket.setTicketNumber(ticketNumber);
         System.out.println("Ticket Number: " + ticket.getTicketNumber());
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Retrieves the username of the currently authenticated user
+        System.out.println("Username: " + username);
+
         ticketDao.save(ticket);
 
         Double totalAmount = 0.0;
@@ -75,9 +90,11 @@ public class TicketController {
         System.out.println("Booked Seats: " + bookedSeats);
 
         ModelAndView mv = new ModelAndView("showTicketPage");
-        String fromCity = request.getParameter("fromLocation");
-        String toCity = request.getParameter("toLocation");
+        String fromCity = airportDao.findAirportById(request.getParameter("fromLocation")).getAirportLocation();
+        String toCity = airportDao.findAirportById(request.getParameter("toLocation")).getAirportLocation();
         Double basePrice = Double.parseDouble(request.getParameter("totalAmount"));
+        String arrivalTime = request.getParameter("arrivalTime");
+        String departureTime = request.getParameter("departureTime");
         String pname = "";
         String dob = "";
         Long totalPassengers = 0L;
@@ -103,6 +120,11 @@ public class TicketController {
             throw new TicketException("No passengers added to the ticket");
         }
         ticket.setTotalAmount(totalAmount);
+        ticket.setArrivalTime(arrivalTime);
+        ticket.setDepartureTime(departureTime);
+        ticket.setSourceAirport(fromCity);
+        ticket.setDestinationAirport(toCity);
+        ticket.setUsername(username);
         ticketService.updateBookedSeats(ticket.getFlightNumber(), totalPassengers);
         ticketDao.save(ticket);
         List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
@@ -157,6 +179,29 @@ public class TicketController {
         System.out.println("Passenger List: " + passengerList.size());
         ModelAndView mv = new ModelAndView("passengerReportPage");
         mv.addObject("passengerList", passengerList);
+        return mv;
+    }
+
+    // Displays a page to select a route for flight search
+    @GetMapping("/mytickets")
+    public ModelAndView showMyTickets() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // Retrieves the username of the currently authenticated user
+        System.out.println("Username: " + username);
+
+        List<Ticket> ticketList = ticketDao.findTicketsByUsername(username);
+        Map<Ticket, List<Passenger>> ticketPassengerMap = new HashMap<>();
+
+        // For each ticket, find the passengers associated with it and add to the map
+        for (Ticket ticket : ticketList) {
+            List<Passenger> passengerList = passengerDao.findByTicketId(ticket.getTicketNumber()); // Find passengers by
+                                                                                                   // ticket Number
+            ticketPassengerMap.put(ticket, passengerList);
+        }
+
+        ModelAndView mv = new ModelAndView("myTicketsPage");
+        mv.addObject("ticketPassengerMap", ticketPassengerMap);
+        // mv.addObject("ticketList", ticketList);
         return mv;
     }
 

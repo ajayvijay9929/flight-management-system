@@ -1,5 +1,7 @@
 package com.aeroBlasters.flightManagementSystem.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,4 +36,13 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Transactional
     @Query("DELETE FROM Ticket t WHERE t.ticketNumber = :ticketNumber")
     void deleteTicketByTicketNumber(Long ticketNumber);
+
+    /**
+     * Finds all tickets by the username of the passenger.
+     * 
+     * @param username the username of the passenger.
+     * @return a list of Ticket entities with the specified username.
+     */
+    @Query("SELECT t FROM Ticket t WHERE t.username = :username")
+    public List<Ticket> findTicketsByUsername(String username);
 }

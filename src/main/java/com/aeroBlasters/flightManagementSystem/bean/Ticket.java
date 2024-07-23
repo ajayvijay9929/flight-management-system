@@ -11,6 +11,12 @@ public class Ticket {
     private Long flightNumber;
     private String carrierName;
     private Double totalAmount;
+    private String username;
+    private String date;
+    private String arrivalTime;
+    private String departureTime;
+    private String SourceAirport;
+    private String DestinationAirport;
 
     // Default constructor
     public Ticket() {
@@ -66,5 +72,53 @@ public class Ticket {
 
     public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getSourceAirport() {
+        return SourceAirport;
+    }
+
+    public void setSourceAirport(String sourceAirport) {
+        SourceAirport = sourceAirport;
+    }
+
+    public String getDestinationAirport() {
+        return DestinationAirport;
+    }
+
+    public void setDestinationAirport(String destinationAirport) {
+        DestinationAirport = destinationAirport;
     }
 }

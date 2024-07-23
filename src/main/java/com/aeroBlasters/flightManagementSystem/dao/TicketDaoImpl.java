@@ -54,4 +54,9 @@ public class TicketDaoImpl implements TicketDao {
     public List<Ticket> findAllTickets() {
         return repository.findAll(); // Retrieve all tickets from the database
     }
+
+    @Override
+    public List<Ticket> findTicketsByUsername(String username) {
+        return repository.findTicketsByUsername(username); // Find all tickets by the username of the passenger
+    }
 }
