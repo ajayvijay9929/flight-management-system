@@ -117,6 +117,8 @@
                     <input type="hidden" name="toLocation" value="${route.destinationAirportCode}" />
                     <input type="hidden" name="routeId" value="${route.routeId}" />
                     <input type="hidden" name="totalAmount" value="${route.fare}" />
+                    <input type="hidden" name="arrivalTime" value="${flight.arrival}" />
+                    <input type="hidden" name="departureTime" value="${flight.departure}" />
                     <h3>Flight Booking Details</h3>
                     <table>
                         <tr>
@@ -138,6 +140,15 @@
                             <td><label class="required">Fare : </label><input type="text" value="${route.fare}"
                                     disabled="true" /></td>
                         </tr>
+                        <tr>
+                            <td><label class="required">Arrival Time : </label><input type="text"
+                                    value="${flight.arrival}" disabled="true" /></td>
+                            <td><label class="required">Departure Time : </label><input type="text"
+                                    value="${flight.departure}" disabled="true" /></td>
+                            <td><label class="required">Additional Information : </label><input type="text"
+                                    disabled="true" value="All OK" /></td>
+                        </tr>
+
                     </table>
 
                     <h3>Enter Passenger Details :</h3>
