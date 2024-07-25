@@ -15,7 +15,6 @@
                     background-size: cover;
                     background-position: center;
                     background-repeat: no-repeat;
-                    height: 100vh;
                     margin: 0;
                     display: flex;
                     align-items: center;
@@ -75,6 +74,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <a href="/index" class="btn btn-primary">Back to Home</a>
             </div>
         </body>
 
