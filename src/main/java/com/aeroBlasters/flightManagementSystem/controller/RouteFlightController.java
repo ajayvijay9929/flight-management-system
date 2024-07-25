@@ -212,6 +212,7 @@ public class RouteFlightController {
             @RequestParam("to_city") String toCity) {
         String fromAirport = airportDao.findAirportCodeByLocation(fromCity);
         String toAirport = airportDao.findAirportCodeByLocation(toCity);
+        System.out.println("fromAirport: " + fromAirport + " toAirport: " + toAirport);
         if (fromAirport.equalsIgnoreCase(toAirport))
             throw new FlightException("From-City & To-City cannot be the same......");
         Route route = routeDao.findRouteBySourceAndDestination(fromAirport, toAirport);
@@ -297,7 +298,7 @@ public class RouteFlightController {
     public ModelAndView handlingRouteException(RouteException exception) {
         String message = "From-City & To-City cannot be the same......";
         ModelAndView mv = new ModelAndView("routeErrorPage");
-        mv.addObject("routeError", message);
+        mv.addObject("errorMessage", message);
         return mv;
     }
 
@@ -305,9 +306,8 @@ public class RouteFlightController {
     // message
     @ExceptionHandler(value = FlightException.class)
     public ModelAndView handlingFlightException(FlightException exception) {
-        String message = "From-City & To-City cannot be the same......";
         ModelAndView mv = new ModelAndView("flightErrorPage");
-        mv.addObject("flightError", message);
+        mv.addObject("errorMessage", exception.getMessage());
         return mv;
     }
 }
