@@ -135,19 +135,19 @@
             <div class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Airport</a>
                 <div class="dropdown-content">
-                    <a href="/airports">Airport Reports</a>
+                    <a href="/allairports">Airport Reports</a>
                 </div>
             </div>
             <div class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Route</a>
                 <div class="dropdown-content">
-                    <a href="/routes">Routes Report</a>
+                    <a href="/allroutes">Routes Report</a>
                 </div>
             </div>
             <div class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">Flight</a>
                 <div class="dropdown-content">
-                    <a href="/flights">All Flights</a>
+                    <a href="/allflights">All Flights</a>
                 </div>
             </div>
             <div class="dropdown">

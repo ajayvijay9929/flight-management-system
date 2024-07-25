@@ -168,6 +168,24 @@ public class AirportController {
 		}
 	}
 
+	/**
+	 * Displays a report of all airports for customers
+	 * 
+	 * @return ModelAndView object for the airport report page
+	 */
+	@GetMapping("/allairports")
+	public ModelAndView showAirportReportPageForCustomer() {
+		try {
+			// Retrieve all airports from the database
+			List<Airport> airportList = airportDao.findAllAirports();
+			ModelAndView mv = new ModelAndView("customerAirportReportPage");
+			mv.addObject("airportList", airportList);
+			return mv;
+		} catch (Exception e) {
+			throw new AirportException("Error displaying airport report page: " + e.getMessage());
+		}
+	}
+
 	@GetMapping("/deleteairport/{id}")
 	public ModelAndView showDeleteAirportPage(@PathVariable("id") String id) {
 		try {

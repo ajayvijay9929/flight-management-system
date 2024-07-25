@@ -147,6 +147,15 @@ public class RouteFlightController {
         return mv;
     }
 
+    // Displays a report page with a list of all routes
+    @GetMapping("/allroutes")
+    public ModelAndView showRouteReportPageForCustomer() {
+        List<Route> routeList = routeDao.findAllRoutes();
+        ModelAndView mv = new ModelAndView("customerRouteReportPage");
+        mv.addObject("routeList", routeList);
+        return mv;
+    }
+
     // Displays the flight entry page with a list of route IDs
     @GetMapping("/flight")
     public ModelAndView showFlightEntryPage() {
@@ -175,6 +184,15 @@ public class RouteFlightController {
     public ModelAndView showFlightReportPage() {
         List<Flight> flightList = flightDao.findAllFlights();
         ModelAndView mv = new ModelAndView("flightReportPage");
+        mv.addObject("flightList", flightList);
+        return mv;
+    }
+
+    // Displays a report page with a list of all flights
+    @GetMapping("/allflights")
+    public ModelAndView showFlightReportPageForCustomer() {
+        List<Flight> flightList = flightDao.findAllFlights();
+        ModelAndView mv = new ModelAndView("customerFlightReportPage");
         mv.addObject("flightList", flightList);
         return mv;
     }
