@@ -53,4 +53,9 @@ public class FlightDaoImpl implements FlightDao {
         System.out.println("FlightDaoImpl: findFlightByFlightNumber() called");
         return repository.findFlightByFlightNumber(flightNumber); // Find a flight by its flight number
     }
+
+    @Override
+    public void deleteFlight(Flight flight) {
+        repository.delete(flight); // Delete a flight from the database
+    }
 }

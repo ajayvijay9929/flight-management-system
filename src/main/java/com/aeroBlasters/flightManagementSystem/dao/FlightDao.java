@@ -57,4 +57,6 @@ public interface FlightDao {
      * @return the Flight entity with the specified flight number.
      */
     public Flight findFlightByFlightNumber(Long flightNumber);
+
+    public void deleteFlight(Flight flight);
 }

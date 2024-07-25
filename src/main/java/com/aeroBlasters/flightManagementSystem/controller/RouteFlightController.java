@@ -245,6 +245,34 @@ public class RouteFlightController {
         }
     }
 
+    @GetMapping("/deleteflight/{flightId}")
+    public ModelAndView showDeleteFlight(@PathVariable("flightId") Long flightId) {
+        try {
+            Flight flight = flightDao.findFlightById(flightId);
+            if (flight == null)
+                throw new FlightException("Flight not found......");
+            ModelAndView mv = new ModelAndView("flightDeletePage");
+            mv.addObject("flightRecord", flight);
+            mv.addObject("routeList", routeDao.findAllRoutesId());
+            return mv;
+        } catch (Exception e) {
+            throw new FlightException("Error deleting flight: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/deleteflight")
+    public ModelAndView deleteFlight(@ModelAttribute("flightRecord") Flight flight) {
+        try {
+            Flight removedflight = flightDao.findFlightById(flight.getFlightNumber());
+            if (removedflight == null)
+                throw new FlightException("Flight not found......");
+            flightDao.deleteFlight(removedflight);
+            return new ModelAndView("redirect:/flights");
+        } catch (Exception e) {
+            throw new FlightException("Error deleting flight: " + e.getMessage());
+        }
+    }
+
     // Handles RouteException and redirects to the route error page with the error
     // message
     @ExceptionHandler(value = RouteException.class)
