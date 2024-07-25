@@ -2,6 +2,7 @@ package com.aeroBlasters.flightManagementSystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aeroBlasters.flightManagementSystem.bean.FlightUser;
+import com.aeroBlasters.flightManagementSystem.exception.LoginException;
 import com.aeroBlasters.flightManagementSystem.service.FlightUserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,14 +59,30 @@ public class LoginController {
 	// Displays the index page based on user type (admin or customer)
 	@GetMapping({ "/index", "/" })
 	public ModelAndView showIndexPage() {
-		String indexPage = "";
-		String userType = service.getType();
-		System.out.println("User Type: " + userType);
-		if (userType.equalsIgnoreCase("admin")) {
-			indexPage = "adminIndex";
-		} else if (userType.equalsIgnoreCase("customer")) {
-			indexPage = "customerIndex";
+		try {
+			String indexPage = "";
+			String userType = service.getType();
+			if (userType == null) {
+				throw new LoginException("Please Log in to continue...");
+			}
+			System.out.println("User Type: " + userType);
+			if (userType.equalsIgnoreCase("admin")) {
+				indexPage = "adminIndex";
+			} else if (userType.equalsIgnoreCase("customer")) {
+				indexPage = "customerIndex";
+			}
+			return new ModelAndView(indexPage);
+		} catch (Exception e) {
+			throw new LoginException(e.getMessage());
 		}
-		return new ModelAndView(indexPage);
+
+	}
+
+	@ExceptionHandler(value = LoginException.class)
+	public ModelAndView handlingLoginException(LoginException exception) {
+		String message = "Login Exception: " + exception.getMessage();
+		ModelAndView mv = new ModelAndView("loginPage");
+		mv.addObject("errorMessage", message);
+		return mv;
 	}
 }
