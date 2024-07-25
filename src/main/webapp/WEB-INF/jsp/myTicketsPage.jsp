@@ -46,6 +46,8 @@
                             <th>Passenger Name</th>
                             <th>Age</th>
                             <th>Fare</th>
+                            <th>Update Details</th>
+                            <th>Cancel Ticket</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +64,12 @@
                                     <td>${passenger.passengerName}</td>
                                     <td>${passenger.passengerAge}</td>
                                     <td>${passenger.fare}</td>
+                                    <td><a href="/updateticket/${entry.key.ticketNumber}"
+                                            class="btn btn-secondary">Update</a>
+                                    </td>
+                                    <td><a href="/deleteticket/${entry.key.ticketNumber}"
+                                            class="btn btn-danger">Remove</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </c:forEach>

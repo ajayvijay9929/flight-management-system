@@ -28,6 +28,7 @@ import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
+import com.aeroBlasters.flightManagementSystem.exception.RouteException;
 import com.aeroBlasters.flightManagementSystem.exception.TicketException;
 import com.aeroBlasters.flightManagementSystem.service.TicketService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -205,10 +206,94 @@ public class TicketController {
         return mv;
     }
 
+    @GetMapping("/updateticket/{ticketNumber}")
+    public ModelAndView showUpdateTicketForm(@PathVariable Long ticketNumber) {
+        Ticket ticket = ticketDao.findTicketByTicketNumber(ticketNumber);
+        Flight flight = flightDao.findFlightById(ticket.getFlightNumber());
+        Route route = routeDao.findRouteById(flight.getRouteId());
+        List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
+
+        ModelAndView mv = new ModelAndView("ticketUpdatePage");
+        mv.addObject("ticketRecord", ticket);
+        mv.addObject("flight", flight);
+        mv.addObject("route", route);
+        mv.addObject("passengerList", passengerList);
+        return mv;
+    }
+
+    @PostMapping("/updateticket")
+    public ModelAndView updateTicket(@ModelAttribute("ticketRecord") Ticket ticket, HttpServletRequest request) {
+        // Retrieve username of the authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        System.out.println("Username: " + username);
+
+        // Retrieve additional parameters from the request
+        String ticketNumberStr = request.getParameter("ticketNumber");
+        String fromLocation = request.getParameter("fromLocation");
+        String toLocation = request.getParameter("toLocation");
+        String totalAmountStr = request.getParameter("totalAmount");
+        String arrivalTime = request.getParameter("arrivalTime");
+        String departureTime = request.getParameter("departureTime");
+
+        // Check for null or empty parameters before parsing
+        if (ticketNumberStr == null || ticketNumberStr.isEmpty() ||
+                totalAmountStr == null || totalAmountStr.isEmpty() ||
+                fromLocation == null || fromLocation.isEmpty() ||
+                toLocation == null || toLocation.isEmpty() ||
+                arrivalTime == null || arrivalTime.isEmpty() ||
+                departureTime == null || departureTime.isEmpty()) {
+            throw new IllegalArgumentException("Required parameters are missing");
+        }
+
+        Long ticketNumber = Long.parseLong(ticketNumberStr);
+        Double totalAmount = Double.parseDouble(totalAmountStr);
+
+        // Retrieve and save passengers
+        for (int i = 1; i <= 6; i++) {
+            String passengerIdStr = request.getParameter("id" + i);
+            String passengerName = request.getParameter("name" + i);
+            String passengerAgeStr = request.getParameter("age" + i);
+
+            if (passengerName == null || passengerName.isEmpty() ||
+                    passengerIdStr == null || passengerIdStr.isEmpty() ||
+                    passengerAgeStr == null || passengerAgeStr.isEmpty()) {
+                continue;
+            }
+
+            Long passengerId = Long.parseLong(passengerIdStr);
+            Integer passengerAge = Integer.parseInt(passengerAgeStr);
+
+            Passenger passenger = new Passenger();
+            passenger.setId(passengerId);
+            passenger.setPassengerName(passengerName);
+            passenger.setPassengerAge(passengerAge);
+            passenger.setTicket(ticket);
+            passengerDao.update(passenger);
+            System.out.println("Passenger Name: " + passengerName + ", Age: " + passengerAge);
+        }
+
+        // Update ticket details
+        ticket.setTicketNumber(ticketNumber);
+        ticket.setTotalAmount(totalAmount);
+        ticket.setArrivalTime(arrivalTime);
+        ticket.setDepartureTime(departureTime);
+        ticket.setSourceAirport(airportDao.findAirportById(fromLocation).getAirportLocation());
+        ticket.setDestinationAirport(airportDao.findAirportById(toLocation).getAirportLocation());
+        ticket.setUsername(username);
+
+        // Retrieve passenger list and prepare ModelAndView
+        List<Passenger> passengerList = passengerDao.findByTicketId(ticket.getTicketNumber());
+        ModelAndView mv = new ModelAndView("showTicketPage");
+        mv.addObject("passengerList", passengerList);
+        mv.addObject("ticketRecord", ticket);
+        return mv;
+    }
+
     @ExceptionHandler(value = TicketException.class)
     public ModelAndView handlingTicketException(TicketException exception) {
         String message = "Ticket Exception: " + exception.getMessage();
-        ModelAndView mv = new ModelAndView("ticketErrorPage");
+        ModelAndView mv = new ModelAndView("myTicketsPage");
         mv.addObject("errorMessage", message);
         return mv;
     }
