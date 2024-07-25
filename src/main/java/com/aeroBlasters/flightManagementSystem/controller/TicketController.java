@@ -290,6 +290,59 @@ public class TicketController {
         return mv;
     }
 
+    @GetMapping("/deleteticket/{ticketNumber}")
+    public ModelAndView showDeleteTicketForm(@PathVariable Long ticketNumber) {
+        Ticket ticket = ticketDao.findTicketByTicketNumber(ticketNumber);
+        Flight flight = flightDao.findFlightById(ticket.getFlightNumber());
+        Route route = routeDao.findRouteById(flight.getRouteId());
+        List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
+
+        ModelAndView mv = new ModelAndView("ticketDeletePage");
+        mv.addObject("ticketRecord", ticket);
+        mv.addObject("flight", flight);
+        mv.addObject("route", route);
+        mv.addObject("passengerList", passengerList);
+        return mv;
+    }
+
+    @PostMapping("/deleteticket")
+    public ModelAndView deleteTicket(@ModelAttribute("ticketRecord") Ticket ticket) {
+        // Retrieve username of the authenticated user
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        System.out.println("Username: " + username);
+
+        // Retrieve ticket number
+        Long ticketNumber = ticket.getTicketNumber();
+        System.out.println("Ticket Number: " + ticketNumber);
+
+        // Retrieve passengers associated with the ticket
+        List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
+
+        // Delete passengers associated with the ticket
+        for (Passenger passenger : passengerList) {
+            passengerDao.deleteById(passenger.getId());
+        }
+
+        // Delete the ticket
+        ticketDao.delete(ticket);
+
+        List<Ticket> ticketList = ticketDao.findTicketsByUsername(username);
+        Map<Ticket, List<Passenger>> ticketPassengerMap = new HashMap<>();
+
+        // For each ticket, find the passengers associated with it and add to the map
+        for (Ticket t : ticketList) {
+            List<Passenger> ticketPassengers = passengerDao.findByTicketId(t.getTicketNumber()); // Find passengers by
+                                                                                                 // ticket Number
+            ticketPassengerMap.put(t, ticketPassengers);
+        }
+
+        ModelAndView mv = new ModelAndView("myTicketsPage");
+        mv.addObject("ticketPassengerMap", ticketPassengerMap);
+        mv.addObject("message", "Ticket Deleted Successfully");
+        return mv;
+    }
+
     @ExceptionHandler(value = TicketException.class)
     public ModelAndView handlingTicketException(TicketException exception) {
         String message = "Ticket Exception: " + exception.getMessage();
