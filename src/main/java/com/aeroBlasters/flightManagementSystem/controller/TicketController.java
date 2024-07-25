@@ -269,6 +269,7 @@ public class TicketController {
             passenger.setPassengerName(passengerName);
             passenger.setPassengerAge(passengerAge);
             passenger.setTicket(ticket);
+            passenger.setFare(ticket.getTotalAmount());
             passengerDao.update(passenger);
             System.out.println("Passenger Name: " + passengerName + ", Age: " + passengerAge);
         }
