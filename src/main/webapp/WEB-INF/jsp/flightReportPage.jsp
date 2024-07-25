@@ -76,6 +76,8 @@
                                     <th>Departure</th>
                                     <th>Arrival</th>
                                     <th>Seat Available</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,6 +91,10 @@
                                         <c:set var="seatAvailable" scope="session"
                                             value="${flight.seatCapacity-flight.seatBooked}" />
                                         <td>${seatAvailable}</td>
+                                        <td><a href="updateflight/${flight.flightNumber}"
+                                                class="btn btn-warning">Update</a></td>
+                                        <td><a href="deleteflight/${flight.flightNumber}"
+                                                class="btn btn-danger">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

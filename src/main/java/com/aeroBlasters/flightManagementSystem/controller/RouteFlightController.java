@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aeroBlasters.flightManagementSystem.bean.Flight;
 import com.aeroBlasters.flightManagementSystem.bean.Route;
+import com.aeroBlasters.flightManagementSystem.bean.Ticket;
 import com.aeroBlasters.flightManagementSystem.dao.AirportDao;
 import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.RouteDao;
@@ -207,6 +208,41 @@ public class RouteFlightController {
         mv.addObject("toAirport", toCity);
         mv.addObject("fare", route.getFare());
         return mv;
+    }
+
+    @GetMapping("/updateflight/{flightId}")
+    public ModelAndView showFlightUpdatePage(@PathVariable("flightId") Long flightId) {
+        try {
+            Flight flight = flightDao.findFlightById(flightId);
+            if (flight == null)
+                throw new FlightException("Flight not found......");
+            ModelAndView mv = new ModelAndView("flightUpdatePage");
+            mv.addObject("flightRecord", flight);
+            mv.addObject("routeList", routeDao.findAllRoutesId());
+            return mv;
+        } catch (Exception e) {
+            throw new FlightException("Error displaying flight update page: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/updateflight")
+    public ModelAndView updateFlight(@ModelAttribute("flightRecord") Flight flight) {
+        try {
+            Flight updatedFlight = new Flight();
+            updatedFlight.setFlightNumber(flight.getFlightNumber());
+            updatedFlight.setRouteId(flight.getRouteId());
+            updatedFlight.setDeparture(flight.getDeparture());
+            updatedFlight.setArrival(flight.getArrival());
+            updatedFlight.setCarrierName(flight.getCarrierName());
+            updatedFlight.setSeatCapacity(flight.getSeatCapacity());
+            updatedFlight.setSeatBooked(flight.getSeatBooked());
+            flightDao.save(updatedFlight);
+
+            ModelAndView mv = new ModelAndView("redirect:/flights");
+            return mv;
+        } catch (Exception e) {
+            throw new FlightException("Error updating flight: " + e.getMessage());
+        }
     }
 
     // Handles RouteException and redirects to the route error page with the error

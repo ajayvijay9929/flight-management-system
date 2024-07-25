@@ -52,7 +52,7 @@
                         <div class="col-md-6">
                             <div class="card shadow-lg">
                                 <div class="card-body">
-                                    <h2 class="text-center mb-4 font-weight-bold">Sign up now</h2>
+                                    <h2 class="text-center mb-4 font-weight-bold">Sign Up</h2>
                                     <form:form id="registrationForm" action="/register" method="post"
                                         modelAttribute="userRecord">
                                         <div class="form-group">
