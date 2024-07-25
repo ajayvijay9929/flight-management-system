@@ -107,11 +107,22 @@
                                         <td>${seatAvailable}</td>
                                         <td>${fare}</td>
                                         <td><a href="/ticket/${flight.flightNumber}"
-                                                class="btn btn-danger bookTicketLink"
+                                                class="btn btn-danger bookTicketLink ${seatAvailable <= 0 ? 'disabled' : ''}"
                                                 flightNumber="${flight.flightNumber}"
                                                 carrierName="${flight.carrierName}" data-route-id="${flight.routeId}"
-                                                data-departure="${flight.departure}"
-                                                data-arrival="${flight.arrival}">Book Ticket</a></td>
+                                                data-departure="${flight.departure}" data-arrival="${flight.arrival}">
+                                                Book Ticket
+                                            </a>
+                                            <script>
+                                                document.querySelectorAll('.bookTicketLink').forEach(link => {
+                                                    if (link.classList.contains('disabled')) {
+                                                        link.addEventListener('click', function (event) {
+                                                            event.preventDefault();
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
