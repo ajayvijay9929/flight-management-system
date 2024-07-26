@@ -317,16 +317,9 @@ public class TicketController {
         Long ticketNumber = ticket.getTicketNumber();
         System.out.println("Ticket Number: " + ticketNumber);
 
-        // Retrieve passengers associated with the ticket
-        List<Passenger> passengerList = passengerDao.findByTicketId(ticketNumber);
-
-        // Delete passengers associated with the ticket
-        for (Passenger passenger : passengerList) {
-            passengerDao.deleteById(passenger.getId());
-        }
-
-        // Delete the ticket
-        ticketDao.delete(ticket);
+        // Use TicketService to cancel the ticket
+        boolean isCancelled = ticketService.cancelTicket(ticketNumber);
+        System.out.println("Ticket Cancelled: " + isCancelled);
 
         List<Ticket> ticketList = ticketDao.findTicketsByUsername(username);
         Map<Ticket, List<Passenger>> ticketPassengerMap = new HashMap<>();
