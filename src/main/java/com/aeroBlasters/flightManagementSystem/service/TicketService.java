@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aeroBlasters.flightManagementSystem.bean.Flight;
+import com.aeroBlasters.flightManagementSystem.bean.Ticket;
 import com.aeroBlasters.flightManagementSystem.dao.FlightDao;
 import com.aeroBlasters.flightManagementSystem.dao.PassengerDao;
 import com.aeroBlasters.flightManagementSystem.dao.TicketDao;
@@ -91,8 +92,16 @@ public class TicketService {
      */
     public boolean cancelTicket(Long ticketNumber) {
         try {
+            Ticket ticket = ticketDao.findTicketByTicketNumber(ticketNumber);
+            Flight flight = flightDao.findFlightByFlightNumber(ticket.getFlightNumber());
+
+            Long passengerCount = (long) (passengerDao.findByTicketId(ticketNumber).size());
+
             passengerDao.deletePassengerByTicketNumber(ticketNumber);
             ticketDao.deleteTicketByTicketNumber(ticketNumber);
+
+            updateBookedSeats(flight.getFlightNumber(), -passengerCount);
+
             return true;
         } catch (Exception e) {
             return false;
