@@ -102,11 +102,16 @@
                 justify-content: space-around;
                 align-items: center;
                 margin-top: 50px;
+                width: 100%;
+                max-width: 1200px;
             }
 
             .feature {
                 text-align: center;
                 max-width: 300px;
+                padding: 20px;
+                margin: 10px;
+                color: #0B2460;
             }
 
             .feature i {
@@ -183,25 +188,21 @@
         </div>
 
         <div class="title">
-            AeroBlasters Flight Management
+            Flight Management System
         </div>
 
         <div class="features">
             <div class="feature">
                 <i class="fas fa-plane"></i>
                 <h3>Manage Flights</h3>
-                <p>View and add flights, manage schedules, and update flight details with ease.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-ticket-alt"></i>
                 <h3>Book Tickets</h3>
-                <p>Efficiently search for available flights and manage ticket bookings for passengers.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-user-friends"></i>
                 <h3>Manage Passengers</h3>
-                <p>Keep track of passenger information, manage bookings, and ensure a seamless travel experience.
-                </p>
             </div>
         </div>
 

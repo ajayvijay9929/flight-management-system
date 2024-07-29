@@ -102,11 +102,17 @@
                 justify-content: space-around;
                 align-items: center;
                 margin-top: 50px;
+                width: 100%;
+                max-width: 1200px;
+                flex-wrap: wrap;
             }
 
             .feature {
                 text-align: center;
                 max-width: 300px;
+                margin: 10px;
+                padding: 20px;
+                color: #0B2460;
             }
 
             .feature i {
