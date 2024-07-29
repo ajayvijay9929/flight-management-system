@@ -27,7 +27,7 @@
             .navbar {
                 display: flex;
                 justify-content: center;
-                background-color: rgba(17, 0, 253, 0.9);
+                background-color: #0B2460;
                 padding: 10px 0;
                 width: 100%;
                 position: fixed;
@@ -93,7 +93,7 @@
                 margin-top: 80px;
                 font-size: 4rem;
                 font-weight: bold;
-                color: rgba(48, 209, 234, 0.9);
+                color: rgba(255, 255, 255, 0.9);
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
 
@@ -112,11 +112,11 @@
             .feature i {
                 font-size: 3rem;
                 margin-bottom: 20px;
-                color: #007bff;
+                color: #0B2460;
             }
 
             .feature h3 {
-                color: #007bff;
+                color: #0B2460;
             }
 
             .footer {
@@ -168,27 +168,21 @@
         </div>
 
         <div class="title">
-            AeroBlasters Travel Solutions
+            Flight Management System
         </div>
 
         <div class="features">
             <div class="feature">
                 <i class="fas fa-plane"></i>
                 <h3>Explore Flight Options</h3>
-                <p>Discover a wide range of flights tailored to your schedule and budget, ensuring a perfect match for
-                    your travel plans.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-ticket-alt"></i>
                 <h3>Effortless Ticket Booking</h3>
-                <p>Book your tickets with just a few clicks, and enjoy a smooth booking experience with instant
-                    confirmation.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-user-friends"></i>
                 <h3>Personalized Travel Experience</h3>
-                <p>Access your booking history and manage your profile to ensure your preferences are met for every
-                    journey.</p>
             </div>
         </div>
 
