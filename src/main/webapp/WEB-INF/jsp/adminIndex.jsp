@@ -95,6 +95,7 @@
                 font-weight: bold;
                 color: rgba(255, 255, 255, 0.9);
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                -webkit-text-stroke: 2px black;
             }
 
             .features {
