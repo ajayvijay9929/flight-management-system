@@ -48,18 +48,14 @@ public class TicketService {
      */
     public Double discount(Double totalAmount, int age) {
         final double CHILD_DISCOUNT = 0.3; // 30% discount
-        final double YOUTH_DISCOUNT = 0.2; // 20% discount
         final double ELDERLY_DISCOUNT = 0.25; // 25% discount
-        final double NO_DISCOUNT = 0.1; // 10% discount for others
 
-        if (age < 12) {
+        if (age <= 14) {
             return totalAmount - (totalAmount * CHILD_DISCOUNT);
-        } else if (age >= 12 && age <= 24) {
-            return totalAmount - (totalAmount * YOUTH_DISCOUNT);
-        } else if (age >= 65) {
+        } else if (age >= 60) {
             return totalAmount - (totalAmount * ELDERLY_DISCOUNT);
         } else {
-            return totalAmount - (totalAmount * NO_DISCOUNT);
+            return totalAmount;
         }
     }
 

@@ -108,7 +108,8 @@ public class TicketController {
             passenger.setPassengerName(pname);
             passenger.setDob(dob);
             passenger.setTicket(ticket);
-            passenger.setFare(ticket.getTotalAmount());
+            passenger.setFare(ticketService.calculateFinalTicketPrice(LocalDate.parse(dob).getYear(), basePrice,
+                    totalSeats, bookedSeats));
             passenger.setPassengerAge(LocalDate.now().getYear() - LocalDate.parse(dob).getYear());
             passengerDao.save(passenger);
             totalAmount += ticketService.calculateFinalTicketPrice(LocalDate.parse(dob).getYear(), basePrice,

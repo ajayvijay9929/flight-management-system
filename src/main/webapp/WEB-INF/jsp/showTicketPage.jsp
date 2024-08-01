@@ -58,6 +58,7 @@
                                         <tr>
                                             <th>Passenger Name</th>
                                             <th>Age</th>
+                                            <th>Fare</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,6 +66,7 @@
                                             <tr>
                                                 <td>${passenger.passengerName}</td>
                                                 <td>${passenger.passengerAge}</td>
+                                                <td>${passenger.fare}</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
