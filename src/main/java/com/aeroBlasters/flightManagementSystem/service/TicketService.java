@@ -1,5 +1,8 @@
 package com.aeroBlasters.flightManagementSystem.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,13 +53,17 @@ public class TicketService {
         final double CHILD_DISCOUNT = 0.3; // 30% discount
         final double ELDERLY_DISCOUNT = 0.25; // 25% discount
 
+        double discountedAmount;
         if (age <= 14) {
-            return totalAmount - (totalAmount * CHILD_DISCOUNT);
+            discountedAmount = totalAmount - (totalAmount * CHILD_DISCOUNT);
         } else if (age >= 60) {
-            return totalAmount - (totalAmount * ELDERLY_DISCOUNT);
+            discountedAmount = totalAmount - (totalAmount * ELDERLY_DISCOUNT);
         } else {
-            return totalAmount;
+            discountedAmount = totalAmount;
         }
+
+        BigDecimal bd = new BigDecimal(discountedAmount).setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     /**
