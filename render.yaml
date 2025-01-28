@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: flight-management-system
+    env: docker
+    buildCommand: docker build -t flight-management-system .
+    startCommand: docker run -p 8080:8080 flight-management-system
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
